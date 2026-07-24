@@ -1,0 +1,148 @@
+{
+  "generated_at": "2026-07-24T19:40:14.080554Z",
+  "generated_by": "local machine (Kaggle CLI + direct download), not Colab runtime",
+  "datasets": {
+    "nsl-kdd": {
+      "status": "ready",
+      "source_type": "kaggle-mirror",
+      "source": "hassan06/nslkdd",
+      "path": "data/raw/nsl-kdd",
+      "row_count": 371118,
+      "column_count": 43,
+      "class_distribution": {
+        "normal": 185310,
+        "neptune": 111464,
+        "guess_passwd": 5050,
+        "mscan": 3984,
+        "warezmaster": 3830,
+        "apache2": 2948,
+        "satan": 11572,
+        "processtable": 2740,
+        "smurf": 8934,
+        "back": 3740,
+        "snmpguess": 1324,
+        "saint": 1256,
+        "mailbomb": 1172,
+        "snmpgetattack": 712,
+        "portsweep": 7662,
+        "ipsweep": 9182,
+        "httptunnel": 532,
+        "nmap": 3880,
+        "pod": 642,
+        "buffer_overflow": 152,
+        "multihop": 90,
+        "named": 68,
+        "ps": 60,
+        "sendmail": 56,
+        "xterm": 52,
+        "rootkit": 80,
+        "teardrop": 2208,
+        "xlock": 36,
+        "land": 66,
+        "xsnoop": 16,
+        "ftp_write": 30,
+        "loadmodule": 28,
+        "worm": 8,
+        "perl": 14,
+        "sqlattack": 8,
+        "udpstorm": 8,
+        "phf": 20,
+        "imap": 36,
+        "warezclient": 2142,
+        "spy": 6
+      },
+      "issues": [],
+      "files_used": [
+        "KDDTest+.txt",
+        "KDDTest-21.txt",
+        "KDDTrain+.txt",
+        "KDDTrain+_20Percent.txt",
+        "KDDTest+.txt",
+        "KDDTest-21.txt",
+        "KDDTrain+.txt",
+        "KDDTrain+_20Percent.txt"
+      ]
+    },
+    "cicids2017": {
+      "status": "ready",
+      "source_type": "kaggle-mirror",
+      "source": "shadman1028/cicids2017-official-flow-feature-csv-files",
+      "path": "data/raw/cicids2017",
+      "row_count": 2830743,
+      "column_count": 79,
+      "class_distribution": {
+        "DDoS": 128027,
+        "BENIGN": 2273097,
+        "PortScan": 158930,
+        "Bot": 1966,
+        "Infiltration": 36,
+        "Web Attack \ufffd Brute Force": 1507,
+        "Web Attack \ufffd XSS": 652,
+        "Web Attack \ufffd Sql Injection": 21,
+        "FTP-Patator": 7938,
+        "SSH-Patator": 5897,
+        "DoS Hulk": 231073,
+        "DoS slowloris": 5796,
+        "DoS Slowhttptest": 5499,
+        "DoS GoldenEye": 10293,
+        "Heartbleed": 11
+      },
+      "issues": [
+        "missing values in Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv",
+        "missing values in Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv",
+        "missing values in Friday-WorkingHours-Morning.pcap_ISCX.csv",
+        "missing values in Monday-WorkingHours.pcap_ISCX.csv",
+        "missing values in Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv",
+        "missing values in Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv",
+        "missing values in Tuesday-WorkingHours.pcap_ISCX.csv",
+        "missing values in Wednesday-workingHours.pcap_ISCX.csv"
+      ]
+    },
+    "unsw-nb15": {
+      "status": "ready",
+      "source_type": "kaggle-mirror",
+      "source": "mrwellsdavid/unsw-nb15",
+      "path": "data/raw/unsw-nb15",
+      "row_count": 2797716,
+      "column_count": 49,
+      "class_distribution": {
+        "1": 164673,
+        "0": 93000
+      },
+      "issues": [
+        "missing values in UNSW-NB15_1.csv",
+        "missing values in UNSW-NB15_2.csv",
+        "missing values in UNSW-NB15_3.csv",
+        "missing values in UNSW-NB15_4.csv"
+      ],
+      "files_used": [
+        "UNSW-NB15_1.csv",
+        "UNSW-NB15_2.csv",
+        "UNSW-NB15_3.csv",
+        "UNSW-NB15_4.csv",
+        "UNSW_NB15_testing-set.csv",
+        "UNSW_NB15_training-set.csv"
+      ]
+    },
+    "ton-iot": {
+      "status": "ready",
+      "source_type": "kaggle-mirror",
+      "source": "alaaelmor/ton-iot-train-test-network",
+      "path": "data/raw/ton-iot",
+      "row_count": 461043,
+      "column_count": 45,
+      "class_distribution": {
+        "0": 300000,
+        "1": 161043
+      },
+      "issues": []
+    },
+    "iot-23": {
+      "status": "in_progress",
+      "source_type": "official-direct",
+      "source": "https://mcfp.felk.cvut.cz/publicDatasets/IoT-23-Dataset/iot_23_datasets_small.tar.gz",
+      "path": "data/raw/iot-23",
+      "note": "Download still running in the background (~8.7GB) at manifest-generation time; will be updated once complete."
+    }
+  }
+}

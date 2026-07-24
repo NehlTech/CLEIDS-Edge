@@ -1,0 +1,9 @@
+data/*
+!data/dataset_manifest.json
+*.h5
+*.keras
+*.tflite
+*.ckpt
+*.weights.h5
+__pycache__/
+.ipynb_checkpoints/
