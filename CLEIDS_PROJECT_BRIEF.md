@@ -36,6 +36,25 @@ All datasets are public. Acquisition scripts must pull from official sources (Ca
 for Cybersecurity site for CICIDS2017/NSL-KDD, Stratosphere Lab for IoT-23, UNSW site for
 UNSW-NB15/TON_IoT). Never use unofficial mirrors.
 
+**Provenance decision (2026-07-24):** the official CIC source for NSL-KDD (`unb.ca/cic/datasets/nsl.html`
+dataset download) and CICIDS2017 (`cicresearch.ca` direct zip) are both dead/unreachable as of this
+date (confirmed via direct fetch — soft-404s and "no longer available" responses). Both are sourced
+via Kaggle mirrors instead (`hassan06/nslkdd`; `shadman1028/cicids2017-official-flow-feature-csv-files`),
+logged as `kaggle-mirror` rather than `official-direct` in every manifest, per the project's
+no-fabrication rule. IoT-23 (Stratosphere) and UNSW-NB15/TON_IoT (UNSW SharePoint, gated behind
+interactive login) are also Kaggle-mirrored for the same reason. This is a documented deviation, not
+a silent substitution.
+
+**Mirror verification requirement:** every dataset's row/column counts and class distribution must be
+checked against authoritative published documentation (the dataset's own research page, or the
+original paper) before use, with an explicit PASS/MISMATCH verdict recorded in the relevant notebook.
+A real mismatch was caught this way: the `mrwellsdavid/unsw-nb15` Kaggle mirror has
+`UNSW_NB15_training-set.csv` (82,332 rows) and `UNSW_NB15_testing-set.csv` (175,341 rows) swapped
+relative to official UNSW documentation (training=175,341, testing=82,332) — confirmed by matching
+the smaller file's exact per-class distribution (Normal=37,000, Generic=18,871, Exploits=11,132, ...)
+against the officially-documented testing-set counts. Notebook 01 uses the files by their *actual*
+row-count/class-distribution identity, not their on-disk filename.
+
 ## 3. Baseline models (for head-to-head comparison in Chapter 4)
 
 1. Random Forest (classical ML floor)
