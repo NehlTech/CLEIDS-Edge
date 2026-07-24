@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T21:49:00.924896Z",
+  "generated_at": "2026-07-24T22:09:30.650456Z",
   "datasets": {
     "nsl-kdd": {
       "n_features": 122,
@@ -22,7 +22,7 @@
       },
       "encoding": "OneHotEncoder (nominal categoricals, fit on train)",
       "scaling": "MinMaxScaler [0,1] (fit on train)",
-      "smote_method": "SMOTE(k_neighbors=1) -- full match to majority",
+      "smote_method": "SMOTE(k_neighbors=5) -- full match to majority, EXCLUDING classes with <6 samples (kept unaugmented at natural count): {17: 3, 18: 4, 30: 2}",
       "class_distribution_train_before_resample": {
         "normal": 60608,
         "neptune": 37092,
@@ -65,17 +65,17 @@
         "guess_passwd": 60608,
         "buffer_overflow": 60608,
         "land": 60608,
-        "perl": 60608,
         "imap": 60608,
         "multihop": 60608,
         "warezmaster": 60608,
         "loadmodule": 60608,
-        "phf": 60608,
-        "spy": 60608
+        "phf": 4,
+        "perl": 3,
+        "spy": 2
       },
       "shapes": {
         "train": [
-          1393984,
+          1212169,
           122
         ],
         "val": [
@@ -89,7 +89,7 @@
       },
       "cnn_tensor_shape": {
         "train": [
-          1393984,
+          1212169,
           122,
           1
         ],

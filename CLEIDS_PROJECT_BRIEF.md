@@ -45,6 +45,22 @@ no-fabrication rule. IoT-23 (Stratosphere) and UNSW-NB15/TON_IoT (UNSW SharePoin
 interactive login) are also Kaggle-mirrored for the same reason. This is a documented deviation, not
 a silent substitution.
 
+**Split policy (Notebook 01, binding for Chapter 3 methodology):** NSL-KDD and UNSW-NB15 retain
+their official published train/test partitions (confirmed by exact test-split row-count match:
+NSL-KDD 22,544, UNSW-NB15 82,332), with validation carved via a stratified 90/10 split from each
+dataset's official *training* file only. CICIDS2017 and TON_IoT have no canonical official
+partition, so both use a uniform stratified 70/15/15 split with `random_state=42`. All four are
+saved to disk exactly once (`data/processed/<dataset>/{train,val,test}.npz`) so every model in
+Notebooks 03/04 trains and evaluates on identical data per dataset.
+
+**SMOTE policy:** applied to the training split only, per dataset, with method chosen by scale:
+full SMOTE-to-majority where memory allows (NSL-KDD, UNSW-NB15, TON_IoT); a 50,000-row cap for
+CICIDS2017 (majority class ~2.27M rows makes full match infeasible on 7.8GB RAM); and, for
+NSL-KDD specifically, classes with fewer than 6 samples (`spy`, `perl`, `phf`) are excluded from
+SMOTE entirely and kept at their natural rarity, since a single global `k_neighbors` sized off
+one 2-sample class would force near-duplicate interpolation across every oversampled class, not
+just the rare ones.
+
 **Mirror verification requirement:** every dataset's row/column counts and class distribution must be
 checked against authoritative published documentation (the dataset's own research page, or the
 original paper) before use, with an explicit PASS/MISMATCH verdict recorded in the relevant notebook.
