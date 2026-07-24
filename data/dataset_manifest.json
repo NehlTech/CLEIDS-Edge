@@ -103,26 +103,18 @@
       "source_type": "kaggle-mirror",
       "source": "mrwellsdavid/unsw-nb15",
       "path": "data/raw/unsw-nb15",
-      "row_count": 2797716,
-      "column_count": 49,
+      "row_count": 257673,
+      "column_count": 45,
       "class_distribution": {
         "1": 164673,
         "0": 93000
       },
-      "issues": [
-        "missing values in UNSW-NB15_1.csv",
-        "missing values in UNSW-NB15_2.csv",
-        "missing values in UNSW-NB15_3.csv",
-        "missing values in UNSW-NB15_4.csv"
-      ],
+      "issues": [],
       "files_used": [
-        "UNSW-NB15_1.csv",
-        "UNSW-NB15_2.csv",
-        "UNSW-NB15_3.csv",
-        "UNSW-NB15_4.csv",
-        "UNSW_NB15_testing-set.csv",
-        "UNSW_NB15_training-set.csv"
-      ]
+        "UNSW_NB15_training-set.csv",
+        "UNSW_NB15_testing-set.csv"
+      ],
+      "note": "Raw headerless UNSW-NB15_1..4.csv batches excluded from this summary and from Notebook 01 modeling -- they lack an aligned ground-truth label file in this mirror. Only the canonical pre-split training-set/testing-set files are used."
     },
     "ton-iot": {
       "status": "ready",

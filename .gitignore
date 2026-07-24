@@ -1,5 +1,8 @@
 data/*
 !data/dataset_manifest.json
+!data/processed/
+data/processed/*
+!data/processed/preprocessing_manifest.json
 *.h5
 *.keras
 *.tflite
