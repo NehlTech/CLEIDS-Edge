@@ -1,0 +1,699 @@
+{
+  "nsl-kdd": {
+    "binary": {
+      "accuracy": 0.7649485450674237,
+      "precision": 0.9164271501216007,
+      "recall": 0.6459908049559728,
+      "f1": 0.757804287216052,
+      "auc": 0.9290711930916636,
+      "fpr": 0.0778498609823911,
+      "train_time_sec": 890.76,
+      "epochs_run": 21,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_nsl-kdd_binary.keras"
+    },
+    "multiclass": {
+      "accuracy": 0.6927785663591199,
+      "precision": 0.22584666224110841,
+      "recall": 0.2968550704007464,
+      "f1": 0.2266741015323158,
+      "auc": 0.9005583268597167,
+      "fpr": 0.01172178669854408,
+      "train_time_sec": 891.27,
+      "epochs_run": 21,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_nsl-kdd_multiclass.keras",
+      "per_class_report": {
+        "apache2": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 737.0
+        },
+        "back": {
+          "precision": 0.4296577946768061,
+          "recall": 0.9442896935933147,
+          "f1-score": 0.5905923344947736,
+          "support": 359.0
+        },
+        "buffer_overflow": {
+          "precision": 0.16666666666666666,
+          "recall": 0.05,
+          "f1-score": 0.07692307692307693,
+          "support": 20.0
+        },
+        "ftp_write": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "guess_passwd": {
+          "precision": 0.2727272727272727,
+          "recall": 0.002437043054427295,
+          "f1-score": 0.004830917874396135,
+          "support": 1231.0
+        },
+        "httptunnel": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 133.0
+        },
+        "imap": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "ipsweep": {
+          "precision": 0.8853503184713376,
+          "recall": 0.9858156028368794,
+          "f1-score": 0.9328859060402684,
+          "support": 141.0
+        },
+        "land": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 7.0
+        },
+        "loadmodule": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "mailbomb": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 293.0
+        },
+        "mscan": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 996.0
+        },
+        "multihop": {
+          "precision": 0.02702702702702703,
+          "recall": 0.05555555555555555,
+          "f1-score": 0.03636363636363636,
+          "support": 18.0
+        },
+        "named": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 17.0
+        },
+        "neptune": {
+          "precision": 0.9350040749796251,
+          "recall": 0.985398325101997,
+          "f1-score": 0.9595399895452169,
+          "support": 4657.0
+        },
+        "nmap": {
+          "precision": 0.4269005847953216,
+          "recall": 1.0,
+          "f1-score": 0.5983606557377049,
+          "support": 73.0
+        },
+        "normal": {
+          "precision": 0.6751322751322751,
+          "recall": 0.9197816908660282,
+          "f1-score": 0.7786931694346366,
+          "support": 9711.0
+        },
+        "perl": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "phf": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "f1-score": 0.2857142857142857,
+          "support": 2.0
+        },
+        "pod": {
+          "precision": 0.7222222222222222,
+          "recall": 0.9512195121951219,
+          "f1-score": 0.8210526315789474,
+          "support": 41.0
+        },
+        "portsweep": {
+          "precision": 0.46017699115044247,
+          "recall": 0.9936305732484076,
+          "f1-score": 0.6290322580645161,
+          "support": 157.0
+        },
+        "processtable": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 685.0
+        },
+        "ps": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 15.0
+        },
+        "rootkit": {
+          "precision": 0.08888888888888889,
+          "recall": 0.3076923076923077,
+          "f1-score": 0.13793103448275862,
+          "support": 13.0
+        },
+        "saint": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 319.0
+        },
+        "satan": {
+          "precision": 0.375609756097561,
+          "recall": 0.8380952380952381,
+          "f1-score": 0.5187368421052632,
+          "support": 735.0
+        },
+        "sendmail": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 14.0
+        },
+        "smurf": {
+          "precision": 0.9866468842729971,
+          "recall": 1.0,
+          "f1-score": 0.9932785660941,
+          "support": 665.0
+        },
+        "snmpgetattack": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 178.0
+        },
+        "snmpguess": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 331.0
+        },
+        "spy": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "sqlattack": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "teardrop": {
+          "precision": 0.24489795918367346,
+          "recall": 1.0,
+          "f1-score": 0.39344262295081966,
+          "support": 12.0
+        },
+        "udpstorm": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "warezclient": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "warezmaster": {
+          "precision": 0.9111111111111111,
+          "recall": 0.04343220338983051,
+          "f1-score": 0.08291203235591507,
+          "support": 944.0
+        },
+        "worm": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "xlock": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 9.0
+        },
+        "xsnoop": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "xterm": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 13.0
+        },
+        "accuracy": 0.6927785663591199,
+        "macro avg": {
+          "precision": 0.2202004956850807,
+          "recall": 0.2894336936407277,
+          "f1-score": 0.2210072489940079,
+          "support": 22544.0
+        },
+        "weighted avg": {
+          "precision": 0.5973186367490174,
+          "recall": 0.6927785663591199,
+          "f1-score": 0.607364474145772,
+          "support": 22544.0
+        }
+      }
+    }
+  },
+  "cicids2017": {
+    "binary": {
+      "accuracy": 0.9982983581022692,
+      "precision": 0.9912380183007349,
+      "recall": 0.9988415598240423,
+      "f1": 0.9950252635518683,
+      "auc": 0.9999437306839849,
+      "fpr": 0.0018131958219338826,
+      "train_time_sec": 3303.57,
+      "epochs_run": 41,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_cicids2017_binary.keras"
+    },
+    "multiclass": {
+      "accuracy": 0.9981089904302647,
+      "precision": 0.8608886334593279,
+      "recall": 0.9310296010931396,
+      "f1": 0.8787935647075847,
+      "auc": 0.9998818912442016,
+      "fpr": 0.00017301595217290364,
+      "train_time_sec": 3728.67,
+      "epochs_run": 46,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_cicids2017_multiclass.keras",
+      "per_class_report": {
+        "BENIGN": {
+          "precision": 0.9998325912619077,
+          "recall": 0.9984311355299579,
+          "f1-score": 0.9991313719497482,
+          "support": 311053.0
+        },
+        "Bot": {
+          "precision": 0.5708661417322834,
+          "recall": 0.9897610921501706,
+          "f1-score": 0.7240948813982522,
+          "support": 293.0
+        },
+        "DDoS": {
+          "precision": 0.9997396646881183,
+          "recall": 0.9999479220914488,
+          "f1-score": 0.999843782545303,
+          "support": 19202.0
+        },
+        "DoS GoldenEye": {
+          "precision": 0.9759493670886076,
+          "recall": 1.0,
+          "f1-score": 0.9878283151825753,
+          "support": 1542.0
+        },
+        "DoS Hulk": {
+          "precision": 0.9978010107634736,
+          "recall": 0.997570100667258,
+          "f1-score": 0.997685542354575,
+          "support": 25927.0
+        },
+        "DoS Slowhttptest": {
+          "precision": 0.974937343358396,
+          "recall": 0.9923469387755102,
+          "f1-score": 0.9835651074589128,
+          "support": 784.0
+        },
+        "DoS slowloris": {
+          "precision": 0.9925650557620818,
+          "recall": 0.9937965260545906,
+          "f1-score": 0.9931804091754495,
+          "support": 806.0
+        },
+        "FTP-Patator": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 890.0
+        },
+        "Heartbleed": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 2.0
+        },
+        "Infiltration": {
+          "precision": 0.8333333333333334,
+          "recall": 1.0,
+          "f1-score": 0.9090909090909091,
+          "support": 5.0
+        },
+        "PortScan": {
+          "precision": 0.9886693782684486,
+          "recall": 0.9991925420245173,
+          "f1-score": 0.9939031068599175,
+          "support": 13623.0
+        },
+        "SSH-Patator": {
+          "precision": 0.9698795180722891,
+          "recall": 1.0,
+          "f1-score": 0.9847094801223242,
+          "support": 483.0
+        },
+        "Web Attack - Brute Force": {
+          "precision": 0.8666666666666667,
+          "recall": 0.47058823529411764,
+          "f1-score": 0.6099706744868035,
+          "support": 221.0
+        },
+        "Web Attack - Sql Injection": {
+          "precision": 0.3333333333333333,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.4444444444444444,
+          "support": 3.0
+        },
+        "Web Attack - XSS": {
+          "precision": 0.4097560975609756,
+          "recall": 0.8571428571428571,
+          "f1-score": 0.5544554455445545,
+          "support": 98.0
+        },
+        "accuracy": 0.9981089904302647,
+        "macro avg": {
+          "precision": 0.8608886334593279,
+          "recall": 0.9310296010931396,
+          "f1-score": 0.8787935647075847,
+          "support": 374932.0
+        },
+        "weighted avg": {
+          "precision": 0.9985021329677181,
+          "recall": 0.9981089904302647,
+          "f1-score": 0.9982033786625492,
+          "support": 374932.0
+        }
+      }
+    }
+  },
+  "unsw-nb15": {
+    "binary": {
+      "accuracy": 0.839965019676432,
+      "precision": 0.7783105418037043,
+      "recall": 0.9918600547074914,
+      "f1": 0.8722042249422901,
+      "auc": 0.975578122130778,
+      "fpr": 0.3461351351351351,
+      "train_time_sec": 494.64,
+      "epochs_run": 25,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_unsw-nb15_binary.keras"
+    },
+    "multiclass": {
+      "accuracy": 0.6513749210513531,
+      "precision": 0.4423282697709974,
+      "recall": 0.5712187315224231,
+      "f1": 0.42339869992034396,
+      "auc": 0.9451795439180011,
+      "fpr": 0.0367289238176374,
+      "train_time_sec": 278.72,
+      "epochs_run": 14,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_unsw-nb15_multiclass.keras",
+      "per_class_report": {
+        "Analysis": {
+          "precision": 0.028972303206997084,
+          "recall": 0.23485967503692762,
+          "f1-score": 0.05158150851581508,
+          "support": 677.0
+        },
+        "Backdoor": {
+          "precision": 0.024202842873607376,
+          "recall": 0.10806174957118353,
+          "f1-score": 0.03954802259887006,
+          "support": 583.0
+        },
+        "DoS": {
+          "precision": 0.25708200212992544,
+          "recall": 0.2951821961359746,
+          "f1-score": 0.2748178506375228,
+          "support": 4089.0
+        },
+        "Exploits": {
+          "precision": 0.834090575992965,
+          "recall": 0.5112288896873877,
+          "f1-score": 0.6339181286549708,
+          "support": 11132.0
+        },
+        "Fuzzers": {
+          "precision": 0.22304531512240292,
+          "recall": 0.6357637743319037,
+          "f1-score": 0.33023435157019837,
+          "support": 6062.0
+        },
+        "Generic": {
+          "precision": 0.999339897684141,
+          "recall": 0.962694080864819,
+          "f1-score": 0.9806747638326586,
+          "support": 18871.0
+        },
+        "Normal": {
+          "precision": 0.9992517770295548,
+          "recall": 0.5775135135135135,
+          "f1-score": 0.7319813647574678,
+          "support": 37000.0
+        },
+        "Reconnaissance": {
+          "precision": 0.8419775553533515,
+          "recall": 0.7940503432494279,
+          "f1-score": 0.8173119387604887,
+          "support": 3496.0
+        },
+        "Shellcode": {
+          "precision": 0.15055852355512384,
+          "recall": 0.8201058201058201,
+          "f1-score": 0.254411161263849,
+          "support": 378.0
+        },
+        "Worms": {
+          "precision": 0.06476190476190476,
+          "recall": 0.7727272727272727,
+          "f1-score": 0.1195079086115993,
+          "support": 44.0
+        },
+        "accuracy": 0.6513749210513531,
+        "macro avg": {
+          "precision": 0.4423282697709974,
+          "recall": 0.5712187315224231,
+          "f1-score": 0.42339869992034396,
+          "support": 82332.0
+        },
+        "weighted avg": {
+          "precision": 0.8569730231759345,
+          "recall": 0.6513749210513531,
+          "f1-score": 0.7140448050121286,
+          "support": 82332.0
+        }
+      }
+    }
+  },
+  "ton-iot": {
+    "binary": {
+      "accuracy": 0.6904705464027497,
+      "precision": 0.5363150867823765,
+      "recall": 0.9977645305514158,
+      "f1": 0.6976380687738798,
+      "auc": 0.9428954212248901,
+      "fpr": 0.48080295339178586,
+      "train_time_sec": 824.46,
+      "epochs_run": 12,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_ton-iot_binary.keras"
+    },
+    "multiclass": {
+      "accuracy": 0.8694144838212635,
+      "precision": 0.736923099405999,
+      "recall": 0.9115449552139907,
+      "f1": 0.7764905891951599,
+      "auc": 0.9930256272437644,
+      "fpr": 0.013642027122171779,
+      "train_time_sec": 2368.71,
+      "epochs_run": 35,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_ton-iot_multiclass.keras",
+      "per_class_report": {
+        "backdoor": {
+          "precision": 0.9993333333333333,
+          "recall": 0.9993333333333333,
+          "f1-score": 0.9993333333333333,
+          "support": 3000.0
+        },
+        "ddos": {
+          "precision": 0.9140073899899227,
+          "recall": 0.907,
+          "f1-score": 0.9104902124811779,
+          "support": 3000.0
+        },
+        "dos": {
+          "precision": 0.8213558335757929,
+          "recall": 0.941,
+          "f1-score": 0.8771166692558645,
+          "support": 3000.0
+        },
+        "injection": {
+          "precision": 0.733204845814978,
+          "recall": 0.8876666666666667,
+          "f1-score": 0.8030759951749096,
+          "support": 3000.0
+        },
+        "mitm": {
+          "precision": 0.06318449873631002,
+          "recall": 0.9615384615384616,
+          "f1-score": 0.11857707509881422,
+          "support": 156.0
+        },
+        "normal": {
+          "precision": 0.9987176338981201,
+          "recall": 0.8445777572681126,
+          "f1-score": 0.9152029603330375,
+          "support": 43340.0
+        },
+        "password": {
+          "precision": 0.5789685737308622,
+          "recall": 0.958,
+          "f1-score": 0.7217478653942743,
+          "support": 3000.0
+        },
+        "ransomware": {
+          "precision": 0.7768945416004239,
+          "recall": 0.9773333333333334,
+          "f1-score": 0.8656628284617656,
+          "support": 3000.0
+        },
+        "scanning": {
+          "precision": 0.8080875041431886,
+          "recall": 0.8126666666666666,
+          "f1-score": 0.8103706165863387,
+          "support": 3000.0
+        },
+        "xss": {
+          "precision": 0.6754768392370573,
+          "recall": 0.8263333333333334,
+          "f1-score": 0.7433283358320839,
+          "support": 3000.0
+        },
+        "accuracy": 0.8694144838212635,
+        "macro avg": {
+          "precision": 0.736923099405999,
+          "recall": 0.9115449552139907,
+          "f1-score": 0.7764905891951599,
+          "support": 67496.0
+        },
+        "weighted avg": {
+          "precision": 0.921777077444946,
+          "recall": 0.8694144838212635,
+          "f1-score": 0.8871158571486978,
+          "support": 67496.0
+        }
+      }
+    }
+  },
+  "iot-23": {
+    "binary": {
+      "accuracy": 0.9068666666666667,
+      "precision": 0.9067838214224885,
+      "recall": 0.999896887854494,
+      "f1": 0.951066758671902,
+      "auc": 0.7501094153107571,
+      "fpr": 0.9810551474464869,
+      "train_time_sec": 2308.81,
+      "epochs_run": 41,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_iot-23_binary.keras"
+    },
+    "multiclass": {
+      "accuracy": 0.6876433333333334,
+      "precision": 0.6248430251786994,
+      "recall": 0.4726449165223134,
+      "f1": 0.39458955361489373,
+      "auc": 0.8261474238686181,
+      "fpr": 0.12616880205288233,
+      "train_time_sec": 946.57,
+      "epochs_run": 17,
+      "batch_size_used": 256,
+      "checkpoint_path": "models/cleids_edge_iot-23_multiclass.keras",
+      "per_class_report": {
+        "Attack": {
+          "precision": 0.9,
+          "recall": 1.0,
+          "f1-score": 0.9473684210526315,
+          "support": 9.0
+        },
+        "Benign": {
+          "precision": 0.9364186851211073,
+          "recall": 0.15219148711820324,
+          "f1-score": 0.2618291761148904,
+          "support": 28451.0
+        },
+        "C&C": {
+          "precision": 0.003316749585406302,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.006600660066006601,
+          "support": 21.0
+        },
+        "C&C-HeartBeat": {
+          "precision": 0.46153846153846156,
+          "recall": 0.2,
+          "f1-score": 0.27906976744186046,
+          "support": 30.0
+        },
+        "DDoS": {
+          "precision": 1.0,
+          "recall": 0.29247168554297137,
+          "f1-score": 0.45257731958762887,
+          "support": 18012.0
+        },
+        "Okiru": {
+          "precision": 0.38461538461538464,
+          "recall": 0.0002668184567220463,
+          "f1-score": 0.0005332669712213591,
+          "support": 56218.0
+        },
+        "PartOfAHorizontalPortScan": {
+          "precision": 0.6880118953905362,
+          "recall": 0.9969177578716307,
+          "f1-score": 0.8141482640700168,
+          "support": 197259.0
+        },
+        "accuracy": 0.6876433333333334,
+        "macro avg": {
+          "precision": 0.6248430251786994,
+          "recall": 0.4726449165223134,
+          "f1-score": 0.39458955361489373,
+          "support": 300000.0
+        },
+        "weighted avg": {
+          "precision": 0.6733830332703918,
+          "recall": 0.6876433333333334,
+          "f1-score": 0.5874873773916894,
+          "support": 300000.0
+        }
+      }
+    }
+  }
+}
