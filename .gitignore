@@ -5,6 +5,7 @@ data/processed/*
 !data/processed/preprocessing_manifest.json
 *.h5
 *.keras
+!models/cleids_edge_*.keras
 *.tflite
 *.ckpt
 *.weights.h5
