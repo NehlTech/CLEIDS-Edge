@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T22:09:30.650456Z",
+  "generated_at": "2026-07-25T09:17:06.513090Z",
   "datasets": {
     "nsl-kdd": {
       "n_features": 122,
@@ -348,6 +348,84 @@
       },
       "save_path": "data/processed\\ton-iot",
       "random_state": 42
+    },
+    "iot-23": {
+      "n_features": 76,
+      "n_classes": 7,
+      "dedupe_rows_dropped": {
+        "all": 0
+      },
+      "missing_values_after_placeholder_conversion": {
+        "all": 12229210
+      },
+      "infinity_values_found": {
+        "all": 0
+      },
+      "n_rows_affected_by_infinity": {
+        "all": 0
+      },
+      "encoding": "OneHotEncoder (nominal categoricals, fit on train)",
+      "scaling": "MinMaxScaler [0,1] (fit on train)",
+      "smote_method": "SMOTE(k_neighbors=5, cap=50000, classes=[0, 2, 3])",
+      "class_distribution_train_before_resample": {
+        "PartOfAHorizontalPortScan": 920512,
+        "Okiru": 262338,
+        "Benign": 132765,
+        "DDoS": 84055,
+        "C&C-HeartBeat": 140,
+        "C&C": 100,
+        "Attack": 40
+      },
+      "class_distribution_train_after_resample": {
+        "PartOfAHorizontalPortScan": 920512,
+        "Okiru": 262338,
+        "Benign": 132765,
+        "DDoS": 84055,
+        "C&C-HeartBeat": 50000,
+        "C&C": 50000,
+        "Attack": 50000
+      },
+      "shapes": {
+        "train": [
+          1549670,
+          76
+        ],
+        "val": [
+          300050,
+          76
+        ],
+        "test": [
+          300000,
+          76
+        ]
+      },
+      "cnn_tensor_shape": {
+        "train": [
+          1549670,
+          76,
+          1
+        ],
+        "val": [
+          300050,
+          76,
+          1
+        ],
+        "test": [
+          300000,
+          76,
+          1
+        ]
+      },
+      "save_path": "data/processed\\iot-23",
+      "random_state": 42,
+      "provenance": "reservoir sample (Algorithm R, seed=42) of the full ~325.3M-row IoT-23 dataset, sample size 2,000,000 -- see markdown above for full rationale",
+      "total_rows_in_full_dataset": 325309946,
+      "reservoir_sample_size": 2000000,
+      "rare_label_merges": {
+        "C&C-HeartBeat-Attack": "C&C-HeartBeat",
+        "C&C-HeartBeat-FileDownload": "C&C-HeartBeat",
+        "C&C-PartOfAHorizontalPortScan": "C&C"
+      }
     }
   }
 }

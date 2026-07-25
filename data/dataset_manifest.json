@@ -124,11 +124,35 @@
       "issues": []
     },
     "iot-23": {
-      "status": "in_progress",
+      "status": "ready (reservoir-sampled subset, not the full raw dataset)",
       "source_type": "official-direct",
       "source": "https://mcfp.felk.cvut.cz/publicDatasets/IoT-23-Dataset/iot_23_datasets_small.tar.gz",
-      "path": "data/raw/iot-23",
-      "note": "Download still running in the background (~8.7GB) at manifest-generation time; will be updated once complete."
+      "path": "data/raw/iot-23 (compressed archive, not extracted); data/raw/iot-23-sample/sample.parquet (sampled subset actually used)",
+      "row_count_full_dataset": 325309946,
+      "row_count_sample_used": 2000000,
+      "column_count": 24,
+      "class_distribution_label": {
+        "Malicious": 1810328,
+        "Benign": 189672
+      },
+      "class_distribution_detailed_label_pre_merge": {
+        "PartOfAHorizontalPortScan": 1315063,
+        "Okiru": 374783,
+        "Benign (from '-')": 189672,
+        "DDoS": 120082,
+        "C&C-HeartBeat": 195,
+        "C&C": 138,
+        "Attack": 57,
+        "C&C-PartOfAHorizontalPortScan": 5,
+        "C&C-HeartBeat-Attack": 4,
+        "C&C-HeartBeat-FileDownload": 1
+      },
+      "issues": [
+        "Full dataset is ~47.06GB uncompressed across 23 conn.log.labeled capture files (tarfile-verified, not estimated) -- extraction alone requires more disk than this machine had available (hit 100% full/15MB free during a first extraction attempt), so the full ~325.3M rows were never extracted or loaded.",
+        "Used a single-pass reservoir sample (Algorithm R, seed=42, uniform across the full stream, no bias toward any capture file) of 2,000,000 rows instead, streamed directly from the compressed tar.gz via Python's tarfile module without extracting to disk.",
+        "This is a documented scale reduction (~162x subsample), not a claim of using the complete dataset."
+      ],
+      "note": "See CLEIDS_PROJECT_BRIEF.md and notebooks/01_Preprocessing_and_Feature_Engineering.ipynb (## IoT-23 section) for full sampling/merge/SMOTE methodology and rationale."
     }
   }
 }

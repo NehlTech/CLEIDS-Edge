@@ -61,6 +61,60 @@ SMOTE entirely and kept at their natural rarity, since a single global `k_neighb
 one 2-sample class would force near-duplicate interpolation across every oversampled class, not
 just the rare ones.
 
+**IoT-23 (2026-07-25): reservoir sampling + capped SMOTE, both explicit deviations from a
+straightforward port of the other datasets' pipeline.**
+- *Scale problem*: the full IoT-23 dataset is ~325.3M rows (real count, confirmed by streaming
+  all 23 `conn.log.labeled` capture files in a single pass) / ~47.06GB uncompressed (real,
+  tarfile-member-size sum, not estimated) — ~80x the combined training data of the other four
+  datasets. Extracting it required more disk than this machine had free (hit 100% full / 15MB
+  free mid-extraction). Resolved by streaming the compressed `tar.gz` directly via Python's
+  `tarfile` module (no extraction to disk) and taking a **reservoir sample (Algorithm R,
+  seed=42)** of 2,000,000 rows, uniformly across the entire stream with no bias toward any
+  capture file or point in time. This is a documented ~162x subsample, not a claim of using the
+  complete dataset — stated explicitly in the notebook and `data/dataset_manifest.json` rather
+  than implied.
+- *Zeek log quirk (verified, not assumed)*: the trailing `tunnel_parents`/`label`/`detailed-label`
+  fields are whitespace-separated from each other, not tab-separated like the other 21 standard
+  Zeek `conn.log` fields — confirmed by direct byte-level inspection of the raw stream before
+  writing the parser.
+- *Label handling*: `label` casing normalized (`benign`→`Benign`). `detailed-label`'s `'-'`
+  placeholder (meaning "no attack subtype", i.e. benign) is mapped to `Benign` *before* the
+  shared `clean_frame` cleaning step, since that step's blanket `'-'`→NaN replacement would
+  otherwise silently convert legitimate benign rows to a missing multiclass label.
+- *Ultra-rare compound-label merge (explicit decision)*: 3 of the 10 raw `detailed-label` values
+  are Stratosphere "multi-hit" compound tags (a flow matching more than one detection heuristic
+  at once) with too few rows to survive a stratified split at all —
+  `C&C-PartOfAHorizontalPortScan`=5, `C&C-HeartBeat-Attack`=4, `C&C-HeartBeat-FileDownload`=1.
+  Merged into their base category (`C&C`, `C&C-HeartBeat`, `C&C-HeartBeat` respectively) rather
+  than dropped or force-placed train-only, per explicit decision — a standard simplification in
+  published IoT-23 work. Final multiclass taxonomy: 7 classes (`Benign`, `PartOfAHorizontalPortScan`,
+  `Okiru`, `DDoS`, `C&C-HeartBeat`, `C&C`, `Attack`).
+- *`history` field / Zeek-boolean collision (real bug caught and fixed)*: IoT-23's `history`
+  field (Zeek TCP-flag-history string) can legitimately take the literal value `'F'` (3 rows in
+  the sample) — colliding with the shared `clean_frame`'s `'T'`/`'F'`→`1`/`0` boolean conversion
+  (correct for TON_IoT's genuine boolean columns), which silently produced a mixed int/str column
+  and crashed `OneHotEncoder`. Fixed by skipping that conversion step for IoT-23 specifically
+  (safe here since the dataset's only genuine boolean columns, `local_orig`/`local_resp`, are
+  100% `'-'`/degenerate in this sample and are dropped entirely, not encoded).
+- *SMOTE degeneracy caught and fixed (same category of issue as the NSL-KDD fix above, larger
+  magnitude)*: full SMOTE-to-majority completed without OOM (IoT-23 has far fewer feature columns
+  than CICIDS2017), but was rejected on inspection — it would have oversampled `Attack` from 40
+  real training rows to 920,512 (a 23,013x ratio, the most extreme in this project) and nearly
+  tripled the training set size (6.44M rows) versus every other dataset here. Switched to the
+  same `smote_capped(cap=50,000)` compromise already used for CICIDS2017: only the 3 classes
+  below the cap (`Attack`=40, `C&C`=100, `C&C-HeartBeat`=140) are raised to 50,000 (1,250x for
+  `Attack`); the other 4 classes are already above the cap and untouched. Final train size:
+  1,549,670 rows — comparable in scale to the other four datasets.
+- *Split*: 70/15/15 stratified, `random_state=42` (no official IoT-23 split exists), same policy
+  as CICIDS2017/TON_IoT.
+- *Dropped columns*: `ts`/`uid`/`id.orig_h`/`id.orig_p`/`id.resp_h`/`id.resp_p` (per-flow
+  identifiers, same non-generalizability rationale as TON_IoT's dropped columns);
+  `tunnel_parents` (94.2% `'-'`, real values are opaque per-tunnel identifier strings, not a
+  fixed vocabulary); `local_orig`/`local_resp` (100% `'-'`, degenerate); `scenario` (added by the
+  sampling script itself to record which of the 23 capture files a row came from — dropped to
+  avoid the model learning a shortcut association between capture-file identity and label rather
+  than genuine traffic features).
+
 **Mirror verification requirement:** every dataset's row/column counts and class distribution must be
 checked against authoritative published documentation (the dataset's own research page, or the
 original paper) before use, with an explicit PASS/MISMATCH verdict recorded in the relevant notebook.
@@ -94,12 +148,30 @@ missing, use a reasonable default and note the assumption in the notebook markdo
   peak memory footprint
 - Robustness: performance drop after quantization/pruning (accuracy delta vs compression ratio)
 
+**Figures (Notebook 03, per training run — dataset x binary/multiclass), all 300 DPI:**
+1. Confusion matrix — raw counts AND row-normalized (%), side by side (normalized is what makes
+   an imbalanced-class matrix actually readable).
+2. Training curves — loss and accuracy/F1 per epoch, train vs val.
+3. ROC curve — binary: single curve + AUC. Multiclass: one-vs-rest per class + macro-average.
+4. Precision-Recall curve — same one-vs-rest treatment; more informative than ROC on these
+   imbalanced datasets (a rare-attack ROC can look deceptively good while precision collapses).
+5. Per-class precision/recall/F1 bar chart (multiclass only) — visual companion to the
+   classification-report table.
+6. t-SNE and PCA projection of the trained model's penultimate-layer embeddings on the test set,
+   colored by true class — side by side, one figure per run.
+
+**Figure (Notebook 03, once across all datasets, own results only):** cross-dataset summary bar
+chart — accuracy/F1/AUC grouped by dataset and binary vs multiclass, built from `main_results.json`.
+
+Baseline-vs-CLEIDS-Edge comparison charts and latency/model-size plots stay in Notebooks 04 and 06
+respectively, where that scope already lives (see §6) — not duplicated in Notebook 03.
+
 ## 5. Contribution mapping (what each result must support)
 
 | Contribution | Evidence required |
 |---|---|
 | 1. Compressed hybrid CNN-LSTM meets edge latency/memory budget with minimal accuracy loss | Table: accuracy vs model size vs latency, pre/post compression |
-| 2. First empirical evaluation grounded in a TVET-institution device/threat profile | Table: baseline comparison on all 4 datasets |
+| 2. First empirical evaluation grounded in a TVET-institution device/threat profile | Table: baseline comparison on all 5 datasets |
 | 3. Reproducible benchmark against recent published lightweight/hybrid IDS models | Table: CLEIDS-Edge vs baselines 1–8, all metrics |
 
 ## 6. Repository structure
