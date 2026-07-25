@@ -213,10 +213,12 @@ repo-root/
 Chapters 4, 5, and the Abstract of the thesis will NOT be written until all of the following are
 confirmed complete and their outputs shared back:
 
-- [ ] Notebook 00 — repo/data setup confirmed
-- [ ] Notebook 01 — preprocessing complete, feature set finalized
-- [ ] Notebook 02 — CLEIDS-Edge architecture defined and sanity-checked
-- [ ] Notebook 03 — CLEIDS-Edge trained, `main_results.json` saved
+- [x] Notebook 00 — repo/data setup confirmed
+- [x] Notebook 01 — preprocessing complete, feature set finalized (5 datasets, including IoT-23's
+      reservoir-sampled subset)
+- [x] Notebook 02 — CLEIDS-Edge architecture defined and sanity-checked
+- [x] Notebook 03 — CLEIDS-Edge trained on all 5 datasets (binary + multiclass), `main_results.json`
+      and `tuned_threshold_results.json` saved, all figures/checkpoints pushed (2026-07-25)
 - [ ] Notebook 04 — all 8 baselines trained, `baseline_results.json` saved
 - [ ] Notebook 05 — quantization/pruning applied, `compression_results.json` saved
 - [ ] Notebook 06 — CPU-only latency/throughput benchmark complete
