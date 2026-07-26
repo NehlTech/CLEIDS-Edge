@@ -125,6 +125,45 @@ the smaller file's exact per-class distribution (Normal=37,000, Generic=18,871, 
 against the officially-documented testing-set counts. Notebook 01 uses the files by their *actual*
 row-count/class-distribution identity, not their on-disk filename.
 
+## 2b. Binary evaluation protocol (formalized 2026-07-26, applies to CLEIDS-Edge and all 8 baselines)
+
+**Threshold calibration** (validation-set max-F1 search over 99 candidate cutoffs) is applied to
+every binary evaluation, unconditionally, for every model on every dataset.
+
+**FPR>0.20 auto-retry rule**: if a model's default-threshold (0.5) FPR exceeds 0.20 on a given
+dataset, that specific model/dataset combination is automatically retrained with extended patience
+(`patience=10` instead of 5) before final numbers are reported — a programmatic check, not a
+case-by-case judgment call.
+
+**Provenance of the 0.20 cutoff, stated honestly**: for CLEIDS-Edge's own Notebook 03 results, this
+was NOT decided in advance — UNSW-NB15/TON_IoT/IoT-23 were retried after seeing all 5 datasets'
+results together and noticing which looked bad (IoT-23 tripped the model's own majority-baseline
+warning), not by applying a stated numeric rule as each result arrived. 0.20 is formalized here
+*after the fact* because it's the threshold that cleanly reproduces that actual selection (the real
+FPRs split cleanly: NSL-KDD 0.078 / CICIDS2017 0.0018 vs. UNSW-NB15 0.421 / TON_IoT 0.481 / IoT-23
+0.981). For Notebook 04 (baselines) onward, this is applied *prospectively* — decided before any
+model trains, checked programmatically, no exceptions — which is what makes it a real protocol
+rather than a post-hoc description.
+
+**What the retry does and doesn't fix, per real evidence (not assumed)**: retrying doesn't uniformly
+help. UNSW-NB15 was genuine undertraining (patience=10 measurably improved FPR 0.42->0.35).
+TON_IoT and IoT-23 were threshold-miscalibration, not undertraining — more epochs changed their
+decisions not at all (TON_IoT: bit-identical at 8 vs 12 epochs; IoT-23: bit-identical at 10 vs 41
+epochs) — but threshold tuning fixed TON_IoT well (0.48->0.16) and IoT-23 partially (0.98->0.71,
+capped by its own low AUC=0.75, a genuine feature-separability limit, not a fixable training issue).
+
+## 2c. IoT-23 binary — real, verified failure mode (not resolved, honestly reported)
+
+Confirmed via the real trained model + real test data (not derived): confusion matrix
+`[[TN=539, FP=27912], [FN=28, TP=271521]]` on the real 28,451-benign/271,549-attack test split
+(9.48%/90.52%, matching the full sample's proportions exactly, as expected from stratified
+splitting). The model predicts "Attack" for 99.8% of all test rows regardless of true label.
+AUC=0.75 (vs. 0.90+ for every other dataset) indicates the underlying ranking ability itself is
+weak, not just the decision threshold — plausibly because IoT-23's coarse feature set (8 numeric
+flow stats + 4 categorical columns) doesn't cleanly separate `Benign` from `Okiru` (a Mirai-variant
+botnet that itself performs heavy scanning, so it may resemble `PartOfAHorizontalPortScan` at this
+feature granularity) — stated as a plausible hypothesis, not a proven mechanism.
+
 ## 3. Baseline models (for head-to-head comparison in Chapter 4)
 
 1. Random Forest (classical ML floor)
@@ -140,6 +179,19 @@ row-count/class-distribution identity, not their on-disk filename.
 
 Re-implement each baseline as faithfully as published hyperparameters allow; where a detail is
 missing, use a reasonable default and note the assumption in the notebook markdown cell.
+
+**Fidelity, checked against real sources (2026-07-26), not assumed**:
+- **Altaie & Hoomod (2024)**: fully open access (ETASR) — read directly from the source PDF.
+  Architecture and hyperparameters (Table I: epochs=30, batch_size=32, lr=0.001, dropout=0.3) in
+  `src/models.py::build_altaie_hoomod2024` are genuinely verified, not assumed.
+- **Wang et al. (2023) "DL-BiLSTM"**: open access (PeerJ), but the paper itself tunes hyperparameters
+  per-dataset via Optuna rather than publishing fixed values — `build_wang2023_dlbilstm`'s exact
+  layer sizes are a documented reasonable default consistent with its stated DNN+BiLSTM topology.
+- **Nazir et al. (2024)** and **Misrak & Melaku (2025)**: paywalled (ScienceDirect, Springer) — real
+  full-text access attempts failed (403 / auth redirect). Only abstract-level detail is verifiable;
+  `build_nazir2024_hybrid`/`build_misrak_melaku2025` use documented reasonable defaults, not sourced
+  architectures. Misrak & Melaku's "DNN-BiLSTMQ" naming indicates it extends Wang (2023)'s design, so
+  the same topology is reused for it (no independently-verified difference could be confirmed).
 
 ## 4. Evaluation metrics
 
