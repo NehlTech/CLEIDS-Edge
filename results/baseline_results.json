@@ -1,0 +1,286 @@
+{
+  "random_forest": {
+    "nsl-kdd": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8092175301632364,
+        "precision": 0.9695135373101474,
+        "recall": 0.6864334138549053,
+        "f1": 0.8037775445960126,
+        "auc": 0.963279901921713,
+        "fpr": 0.028524353825558645
+      },
+      "tuned_threshold": {
+        "threshold": 0.39,
+        "accuracy": 0.8333037615330021,
+        "precision": 0.9678317352304361,
+        "recall": 0.7314735447673966,
+        "f1": 0.8332149831350968,
+        "auc": 0.963279901921713,
+        "fpr": 0.0321285140562249
+      },
+      "train_time_sec": 78.9,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 34.005,
+      "latency_ms_per_sample": 0.4686
+    },
+    "cicids2017": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9983650368600173,
+        "precision": 0.9953492013780144,
+        "recall": 0.9950531473567213,
+        "f1": 0.9952011523497131,
+        "auc": 0.9997981103902197,
+        "fpr": 0.0009548212041034808
+      },
+      "tuned_threshold": {
+        "threshold": 0.31,
+        "accuracy": 0.9986344190413194,
+        "precision": 0.9938278339749684,
+        "recall": 0.9981840667512015,
+        "f1": 0.9960011871475656,
+        "auc": 0.9997981103902197,
+        "fpr": 0.001273094938804641
+      },
+      "train_time_sec": 294.88,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 150.224,
+      "latency_ms_per_sample": 0.3896
+    },
+    "unsw-nb15": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8447869601127144,
+        "precision": 0.7830547971410188,
+        "recall": 0.9932939204094238,
+        "f1": 0.8757329702922156,
+        "auc": 0.9776247972913352,
+        "fpr": 0.33716216216216216
+      },
+      "tuned_threshold": {
+        "threshold": 0.5700000000000001,
+        "accuracy": 0.8602730408589613,
+        "precision": 0.8035861722367807,
+        "recall": 0.9876246360187064,
+        "f1": 0.886150861983651,
+        "auc": 0.9776247972913352,
+        "fpr": 0.2957567567567568
+      },
+      "train_time_sec": 40.56,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 287.61,
+      "latency_ms_per_sample": 0.483
+    },
+    "ton-iot": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9928884674647387,
+        "precision": 0.9834994281980068,
+        "recall": 0.9968537837390297,
+        "f1": 0.9901315789473685,
+        "auc": 0.9987537178544048,
+        "fpr": 0.009321642824180895
+      },
+      "tuned_threshold": {
+        "threshold": 0.47000000000000003,
+        "accuracy": 0.9928736517719569,
+        "precision": 0.9832618901816698,
+        "recall": 0.9970607716509355,
+        "f1": 0.9901132556370886,
+        "auc": 0.9987537178544048,
+        "fpr": 0.009460083064143978
+      },
+      "train_time_sec": 103.83,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 88.041,
+      "latency_ms_per_sample": 0.4662
+    },
+    "iot-23": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.36714,
+        "precision": 0.9895604856591517,
+        "recall": 0.3040408913308464,
+        "f1": 0.4651616138283068,
+        "auc": 0.7298056500453562,
+        "fpr": 0.0306140381708903
+      },
+      "tuned_threshold": {
+        "threshold": 0.45,
+        "accuracy": 0.9281066666666666,
+        "precision": 0.9277200787064762,
+        "recall": 0.998357570825155,
+        "f1": 0.9617435355301948,
+        "auc": 0.7298056500453562,
+        "fpr": 0.7423992126814524
+      },
+      "train_time_sec": 46.53,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 217.548,
+      "latency_ms_per_sample": 0.3886
+    }
+  },
+  "svm": {
+    "nsl-kdd": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.5884936124911284,
+        "precision": 0.5808917197452229,
+        "recall": 0.9949349333748928,
+        "f1": 0.7335190876971246,
+        "auc": 0.8794615410052457,
+        "fpr": 0.9486149727113583
+      },
+      "tuned_threshold": {
+        "threshold": 0.97,
+        "accuracy": 0.7490241305890702,
+        "precision": 0.9116465863453815,
+        "recall": 0.6191069897919427,
+        "f1": 0.7374234267681455,
+        "auc": 0.8794615410052457,
+        "fpr": 0.0792915250746576
+      },
+      "train_time_sec": 75.79,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 0.005,
+      "latency_ms_per_sample": 0.0194
+    },
+    "cicids2017": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8936287113396563,
+        "precision": 0.6370458361412206,
+        "recall": 0.8731194915386903,
+        "f1": 0.7366307865020141,
+        "auc": 0.9651787836396996,
+        "fpr": 0.10215943906665424
+      },
+      "tuned_threshold": {
+        "threshold": 0.62,
+        "accuracy": 0.9209670020163656,
+        "precision": 0.7591289478064799,
+        "recall": 0.7852972025235211,
+        "f1": 0.7719913819636811,
+        "auc": 0.9651787836396996,
+        "fpr": 0.051171343790286546
+      },
+      "train_time_sec": 566.94,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 0.004,
+      "latency_ms_per_sample": 0.0204
+    },
+    "unsw-nb15": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.810341058154788,
+        "precision": 0.746528181048929,
+        "recall": 0.9925438983499515,
+        "f1": 0.8521348825317463,
+        "auc": 0.9478157932705493,
+        "fpr": 0.4128918918918919
+      },
+      "tuned_threshold": {
+        "threshold": 0.62,
+        "accuracy": 0.8126609337803041,
+        "precision": 0.7504018754186202,
+        "recall": 0.9885731933292156,
+        "f1": 0.8531774740128698,
+        "auc": 0.9478157932705493,
+        "fpr": 0.4028648648648649
+      },
+      "train_time_sec": 94.6,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 0.006,
+      "latency_ms_per_sample": 0.0206
+    },
+    "ton-iot": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.5078819485599146,
+        "precision": 0.42096447763277267,
+        "recall": 0.9988408676933267,
+        "f1": 0.5923016496465043,
+        "auc": 0.9296986026759,
+        "fpr": 0.7657591139824642
+      },
+      "tuned_threshold": {
+        "threshold": 0.81,
+        "accuracy": 0.853665402394216,
+        "precision": 0.7442107063451343,
+        "recall": 0.9006871998675278,
+        "f1": 0.8150062744657339,
+        "auc": 0.9296986026759,
+        "fpr": 0.1725426857406553
+      },
+      "train_time_sec": 608.35,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 0.003,
+      "latency_ms_per_sample": 0.0198
+    },
+    "iot-23": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.90683,
+        "precision": 0.906823875212933,
+        "recall": 0.9997974582856133,
+        "f1": 0.95104380678146,
+        "auc": 0.7499076036787385,
+        "fpr": 0.980492777055288
+      },
+      "tuned_threshold": {
+        "threshold": 0.88,
+        "accuracy": 0.93004,
+        "precision": 0.9303234626336597,
+        "recall": 0.9974111486324752,
+        "f1": 0.9626999360204734,
+        "auc": 0.7499076036787385,
+        "fpr": 0.7129802115918596
+      },
+      "train_time_sec": 206.98,
+      "epochs_run": null,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": null,
+      "n_params": null,
+      "size_mb": 0.003,
+      "latency_ms_per_sample": 0.0202
+    }
+  }
+}
