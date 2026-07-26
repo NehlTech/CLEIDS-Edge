@@ -127,8 +127,9 @@ row-count/class-distribution identity, not their on-disk filename.
 
 ## 2b. Binary evaluation protocol (formalized 2026-07-26, applies to CLEIDS-Edge and all 8 baselines)
 
-**Threshold calibration** (validation-set max-F1 search over 99 candidate cutoffs) is applied to
-every binary evaluation, unconditionally, for every model on every dataset.
+**Threshold calibration** (validation-set max-Youden's-J search over 99 candidate cutoffs — changed
+from max-F1 on 2026-07-26, see §2d) is applied to every binary evaluation, unconditionally, for
+every model on every dataset.
 
 **FPR>0.20 auto-retry rule**: if a model's default-threshold (0.5) FPR exceeds 0.20 on a given
 dataset, that specific model/dataset combination is automatically retrained with extended patience
@@ -146,11 +147,12 @@ model trains, checked programmatically, no exceptions — which is what makes it
 rather than a post-hoc description.
 
 **What the retry does and doesn't fix, per real evidence (not assumed)**: retrying doesn't uniformly
-help. UNSW-NB15 was genuine undertraining (patience=10 measurably improved FPR 0.42->0.35).
-TON_IoT and IoT-23 were threshold-miscalibration, not undertraining — more epochs changed their
-decisions not at all (TON_IoT: bit-identical at 8 vs 12 epochs; IoT-23: bit-identical at 10 vs 41
-epochs) — but threshold tuning fixed TON_IoT well (0.48->0.16) and IoT-23 partially (0.98->0.71,
-capped by its own low AUC=0.75, a genuine feature-separability limit, not a fixable training issue).
+help. UNSW-NB15 was genuine undertraining (patience=10 measurably improved default-threshold FPR
+0.42->0.35). TON_IoT and IoT-23 were threshold-miscalibration, not undertraining — more epochs
+changed their decisions not at all (TON_IoT: bit-identical at 8 vs 12 epochs; IoT-23: bit-identical
+at 10 vs 41 epochs). (The threshold-tuned FPR values originally reported here — TON_IoT 0.48->0.16,
+IoT-23 0.98->0.71 — used the since-replaced max-F1 criterion; see §2d for the current max-Youden's-J
+numbers and why the criterion changed.)
 
 ## 2c. IoT-23 binary — real, verified failure mode (not resolved, honestly reported)
 
@@ -163,6 +165,43 @@ weak, not just the decision threshold — plausibly because IoT-23's coarse feat
 flow stats + 4 categorical columns) doesn't cleanly separate `Benign` from `Okiru` (a Mirai-variant
 botnet that itself performs heavy scanning, so it may resemble `PartOfAHorizontalPortScan` at this
 feature granularity) — stated as a plausible hypothesis, not a proven mechanism.
+
+## 2d. Threshold-tuning criterion changed from max-F1 to max-Youden's-J (2026-07-26)
+
+**What triggered this**: Notebook 04's first real Random Forest run exposed a real distortion in
+the original max-F1 threshold search. IoT-23's test set is 90.52% Attack; with `1`=Attack as the
+positive class, maximizing F1 is not symmetric between classes — a threshold can improve the
+majority class's F1 while leaving the minority (Benign) class's false-positive rate very high,
+because a small minority's false positives barely move an F1 dominated by the majority class's true
+positives. Concretely: RF's max-F1 threshold selected FPR=0.7127 (71% of real benign traffic flagged
+as an attack) while reporting F1=0.9628 — a genuinely misleading headline number for a security tool.
+SVM showed the identical pattern independently (tuned FPR=0.7130, F1=0.9627, from the opposite
+default-threshold failure mode — SVM's default FPR was 0.98, RF's was 0.03 — both converging to the
+same bad tuned FPR once F1-optimized, indicating the criterion itself, not the model, was responsible).
+
+**Fix**: switched to **Youden's J statistic** (maximize TPR-FPR on validation), a standard
+ROC-analysis criterion that is symmetric between classes by construction. Applied identically in
+Notebook 03 (`tune_threshold_and_reevaluate`) and Notebook 04 (`tune_threshold_on_validation`).
+
+**Verified before adopting** (recomputed locally against CLEIDS-Edge's own already-saved checkpoints,
+no retraining needed, real numbers not estimated):
+
+| Dataset | max-F1 tuned (FPR / Rec) | max-Youden's-J tuned (FPR / Rec) |
+|---|---|---|
+| NSL-KDD | 0.074 / 0.616 | identical |
+| CICIDS2017 | 0.001 / 0.997 | 0.002 / 0.999 (negligible) |
+| UNSW-NB15 | 0.329 / 0.990 | **0.196 / 0.959 — real fix, FPR nearly halved, accuracy and F1 both improve too, not a tradeoff** |
+| TON_IoT | 0.157 / 0.888 | 0.171 / 0.900 (negligible) |
+| IoT-23 | 0.713 / 0.998 | 0.001 / 0.303 |
+
+**IoT-23 does not get "fixed" by this change — it reveals a different, real limitation.** Under
+Youden's J, recall collapses to 0.30 to reach FPR~0.001. A third criterion (max recall subject to
+validation FPR<=0.20, tying directly to this project's own §2b retry rule) was also tried and
+converges to the **identical** threshold — confirming there is no usable middle ground between
+"flag nearly everything" (max-F1's pick) and "flag almost nothing" (Youden's J / FPR-constrained's
+pick) at any threshold for this model. This is consistent with, and further confirms, §2c's AUC=0.75
+finding: it is a real model/data ceiling, not a threshold-tuning artifact. Both operating points are
+reported for IoT-23 in the thesis rather than picking one as the authoritative number.
 
 ## 3. Baseline models (for head-to-head comparison in Chapter 4)
 

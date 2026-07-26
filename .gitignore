@@ -6,6 +6,12 @@ data/processed/*
 *.h5
 *.keras
 !models/cleids_edge_*.keras
+!models/standalone_cnn_*.keras
+!models/standalone_lstm_*.keras
+!models/nazir2024_*.keras
+!models/altaie_hoomod2024_*.keras
+!models/wang2023_dlbilstm_*.keras
+!models/misrak_melaku2025_*.keras
 *.tflite
 *.ckpt
 *.weights.h5
