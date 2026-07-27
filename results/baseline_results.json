@@ -19,14 +19,14 @@
         "auc": 0.963279901921713,
         "fpr": 0.0321285140562249
       },
-      "train_time_sec": 78.9,
+      "train_time_sec": 78.91,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 34.005,
-      "latency_ms_per_sample": 0.4686
+      "latency_ms_per_sample": 0.3488
     },
     "cicids2017": {
       "default_threshold": {
@@ -39,22 +39,22 @@
         "fpr": 0.0009548212041034808
       },
       "tuned_threshold": {
-        "threshold": 0.31,
-        "accuracy": 0.9986344190413194,
-        "precision": 0.9938278339749684,
-        "recall": 0.9981840667512015,
-        "f1": 0.9960011871475656,
+        "threshold": 0.2,
+        "accuracy": 0.9984663885717944,
+        "precision": 0.992163204378654,
+        "recall": 0.9988885236149595,
+        "f1": 0.995514505698528,
         "auc": 0.9997981103902197,
-        "fpr": 0.001273094938804641
+        "fpr": 0.001620302649387725
       },
-      "train_time_sec": 294.88,
+      "train_time_sec": 296.44,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 150.224,
-      "latency_ms_per_sample": 0.3896
+      "latency_ms_per_sample": 0.4532
     },
     "unsw-nb15": {
       "default_threshold": {
@@ -67,22 +67,22 @@
         "fpr": 0.33716216216216216
       },
       "tuned_threshold": {
-        "threshold": 0.5700000000000001,
-        "accuracy": 0.8602730408589613,
-        "precision": 0.8035861722367807,
-        "recall": 0.9876246360187064,
-        "f1": 0.886150861983651,
+        "threshold": 0.7000000000000001,
+        "accuracy": 0.8929456347471214,
+        "precision": 0.8553302455921846,
+        "recall": 0.969557928174358,
+        "f1": 0.9088690833143779,
         "auc": 0.9776247972913352,
-        "fpr": 0.2957567567567568
+        "fpr": 0.20091891891891892
       },
-      "train_time_sec": 40.56,
+      "train_time_sec": 40.17,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 287.61,
-      "latency_ms_per_sample": 0.483
+      "latency_ms_per_sample": 0.4686
     },
     "ton-iot": {
       "default_threshold": {
@@ -95,22 +95,22 @@
         "fpr": 0.009321642824180895
       },
       "tuned_threshold": {
-        "threshold": 0.47000000000000003,
-        "accuracy": 0.9928736517719569,
-        "precision": 0.9832618901816698,
-        "recall": 0.9970607716509355,
-        "f1": 0.9901132556370886,
+        "threshold": 0.41000000000000003,
+        "accuracy": 0.9928440203863933,
+        "precision": 0.9824725879427709,
+        "recall": 0.997805928133797,
+        "f1": 0.9900798948427776,
         "auc": 0.9987537178544048,
-        "fpr": 0.009460083064143978
+        "fpr": 0.009921550530687587
       },
-      "train_time_sec": 103.83,
+      "train_time_sec": 103.74,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 88.041,
-      "latency_ms_per_sample": 0.4662
+      "latency_ms_per_sample": 0.4584
     },
     "iot-23": {
       "default_threshold": {
@@ -123,22 +123,22 @@
         "fpr": 0.0306140381708903
       },
       "tuned_threshold": {
-        "threshold": 0.45,
-        "accuracy": 0.9281066666666666,
-        "precision": 0.9277200787064762,
-        "recall": 0.998357570825155,
-        "f1": 0.9617435355301948,
+        "threshold": 0.99,
+        "accuracy": 0.36934666666666666,
+        "precision": 0.9983298841810987,
+        "recall": 0.30377942839045624,
+        "f1": 0.46581662327981976,
         "auc": 0.7298056500453562,
-        "fpr": 0.7423992126814524
+        "fpr": 0.004850444624090542
       },
-      "train_time_sec": 46.53,
+      "train_time_sec": 46.17,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 217.548,
-      "latency_ms_per_sample": 0.3886
+      "latency_ms_per_sample": 0.3584
     }
   },
   "svm": {
@@ -161,14 +161,14 @@
         "auc": 0.8794615410052457,
         "fpr": 0.0792915250746576
       },
-      "train_time_sec": 75.79,
+      "train_time_sec": 77.87,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 0.005,
-      "latency_ms_per_sample": 0.0194
+      "latency_ms_per_sample": 0.0195
     },
     "cicids2017": {
       "default_threshold": {
@@ -181,22 +181,22 @@
         "fpr": 0.10215943906665424
       },
       "tuned_threshold": {
-        "threshold": 0.62,
-        "accuracy": 0.9209670020163656,
-        "precision": 0.7591289478064799,
-        "recall": 0.7852972025235211,
-        "f1": 0.7719913819636811,
+        "threshold": 0.44,
+        "accuracy": 0.8488365890348116,
+        "precision": 0.5313263806135674,
+        "recall": 0.9562610560591117,
+        "f1": 0.6831016628831509,
         "auc": 0.9651787836396996,
-        "fpr": 0.051171343790286546
+        "fpr": 0.17322449871886786
       },
-      "train_time_sec": 566.94,
+      "train_time_sec": 588.32,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 0.004,
-      "latency_ms_per_sample": 0.0204
+      "latency_ms_per_sample": 0.0212
     },
     "unsw-nb15": {
       "default_threshold": {
@@ -209,22 +209,22 @@
         "fpr": 0.4128918918918919
       },
       "tuned_threshold": {
-        "threshold": 0.62,
-        "accuracy": 0.8126609337803041,
-        "precision": 0.7504018754186202,
-        "recall": 0.9885731933292156,
-        "f1": 0.8531774740128698,
+        "threshold": 0.93,
+        "accuracy": 0.8402686683185153,
+        "precision": 0.8258439480771956,
+        "recall": 0.8996073413923938,
+        "f1": 0.86114894470664,
         "auc": 0.9478157932705493,
-        "fpr": 0.4028648648648649
+        "fpr": 0.23243243243243245
       },
-      "train_time_sec": 94.6,
+      "train_time_sec": 93.74,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 0.006,
-      "latency_ms_per_sample": 0.0206
+      "latency_ms_per_sample": 0.0197
     },
     "ton-iot": {
       "default_threshold": {
@@ -245,14 +245,14 @@
         "auc": 0.9296986026759,
         "fpr": 0.1725426857406553
       },
-      "train_time_sec": 608.35,
+      "train_time_sec": 617.34,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 0.003,
-      "latency_ms_per_sample": 0.0198
+      "latency_ms_per_sample": 0.0189
     },
     "iot-23": {
       "default_threshold": {
@@ -265,22 +265,22 @@
         "fpr": 0.980492777055288
       },
       "tuned_threshold": {
-        "threshold": 0.88,
-        "accuracy": 0.93004,
-        "precision": 0.9303234626336597,
-        "recall": 0.9974111486324752,
-        "f1": 0.9626999360204734,
+        "threshold": 0.97,
+        "accuracy": 0.3691,
+        "precision": 0.9999756936426722,
+        "recall": 0.30300608729916145,
+        "f1": 0.4650851251441362,
         "auc": 0.7499076036787385,
-        "fpr": 0.7129802115918596
+        "fpr": 7.029629889986293e-05
       },
-      "train_time_sec": 206.98,
+      "train_time_sec": 203.01,
       "epochs_run": null,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": null,
       "n_params": null,
       "size_mb": 0.003,
-      "latency_ms_per_sample": 0.0202
+      "latency_ms_per_sample": 0.0195
     }
   }
 }
