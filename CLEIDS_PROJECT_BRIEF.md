@@ -203,6 +203,35 @@ pick) at any threshold for this model. This is consistent with, and further conf
 finding: it is a real model/data ceiling, not a threshold-tuning artifact. Both operating points are
 reported for IoT-23 in the thesis rather than picking one as the authoritative number.
 
+## 2e. Standalone LSTM / TON_IoT — real training collapse, ruled out as an LR issue (ablation finding)
+
+**Observed**: Standalone LSTM's TON_IoT run (Notebook 04 §11) never learned to discriminate at all
+(`auc~0.50` for the entire run, `accuracy`/`precision`/`recall` pinned exactly at the training set's
+majority-class fraction) — qualitatively different from every other model's TON_IoT result, which all
+discriminate fine (`auc~0.94+`) and only have a bad 0.5 decision threshold. The FPR>0.20 auto-retry
+(patience=10) did not recover it (FPR got *worse*: 0.4954->1.0000), and after tuning, the selected
+threshold (t=0.01, the most lenient value in the entire 99-point search grid) still gave FPR=1.0000 —
+meaning the model's probability output doesn't vary meaningfully with input at all, so no threshold
+search can rescue it (unlike IoT-23's §2c/§2d ceiling, which has real, if miscalibrated, signal).
+
+**Ruled out empirically, not assumed**: reran the identical architecture on the identical TON_IoT
+data with `learning_rate=0.0001` (10x lower than the shared default) as a standalone diagnostic —
+result: `test AUC=0.5140`, statistically indistinguishable from the collapsed run. Three independent
+training attempts (original patience=5, patience=10 retry, and this diagnostic — two different
+learning rates) all converged to the same non-discriminating result, ruling out a one-off bad
+initialization or an easily-fixable learning-rate problem.
+
+**Conclusion, and why this is useful evidence rather than just a bad number**: the isolated LSTM
+branch cannot learn TON_IoT's Benign/Attack boundary from the raw feature vector at all, while (a)
+the same architecture trains fine on the other 4 datasets, and (b) CLEIDS-Edge's *full hybrid* (same
+LSTM(100) size, combined with the CNN branch) discriminates TON_IoT well (`auc~0.94+`, see main
+results — its only TON_IoT problem is the threshold, same as every other model). This is concrete
+ablation evidence that the CNN branch is not just incrementally helpful for TON_IoT specifically — it
+is load-bearing; without it, the LSTM alone fails outright on this dataset's feature representation.
+Reported as-is (the original patience-appropriate run, not the diagnostic's numbers, since the
+diagnostic used a non-standard learning rate outside the uniform protocol) rather than hidden or
+re-run until a better number appeared.
+
 ## 3. Baseline models (for head-to-head comparison in Chapter 4)
 
 1. Random Forest (classical ML floor)
