@@ -242,8 +242,8 @@ re-run until a better number appeared.
 6. Altaie & Hoomod (2024) hybrid lightweight CNN+LSTM (Raspberry Pi-targeted) — *Eng. Technol.
    Appl. Sci. Res.*, 14, 16740–16743
 7. Wang et al. (2023) "DL-BiLSTM" — IPCA + dynamic quantization lightweight IDS
-8. Misrak & Melaku (2025) lightweight IDS with dynamic quantization — *Discover Internet of
-   Things*, 5, 97
+
+~~8. Misrak & Melaku (2025)~~ — **dropped (2026-07-27), see below.**
 
 Re-implement each baseline as faithfully as published hyperparameters allow; where a detail is
 missing, use a reasonable default and note the assumption in the notebook markdown cell.
@@ -251,15 +251,34 @@ missing, use a reasonable default and note the assumption in the notebook markdo
 **Fidelity, checked against real sources (2026-07-26), not assumed**:
 - **Altaie & Hoomod (2024)**: fully open access (ETASR) — read directly from the source PDF.
   Architecture and hyperparameters (Table I: epochs=30, batch_size=32, lr=0.001, dropout=0.3) in
-  `src/models.py::build_altaie_hoomod2024` are genuinely verified, not assumed.
+  `src/models.py::build_altaie_hoomod2024` are genuinely verified, not assumed. **Deliberate,
+  documented deviation (2026-07-27)**: batch_size=32 is real for NSL-KDD only (~1.7 hrs, true to the
+  paper) — at this project's much larger post-SMOTE scale it meant ~8x more optimizer steps/epoch
+  than this project's standard batch_size=256, projecting to ~30+ hours for the remaining 4 datasets.
+  Root cause is almost certainly that the paper's batch size was tuned against a dataset far smaller
+  than this project's (up to 2.28M post-SMOTE training rows) — a training-protocol/dataset-scale
+  mismatch, not a challenge to the verified architecture itself. The remaining 4 datasets
+  (CICIDS2017, UNSW-NB15, TON_IoT, IoT-23) used batch_size=256 instead (epochs=30/lr=0.001
+  unchanged), plus `mixed_float16` precision and XLA JIT compilation (pure compute optimizations,
+  no hyperparameter change) enabled globally for the rest of the session. NSL-KDD is the one
+  fully-paper-faithful data point in this baseline; the other 4 carry this documented asterisk.
 - **Wang et al. (2023) "DL-BiLSTM"**: open access (PeerJ), but the paper itself tunes hyperparameters
   per-dataset via Optuna rather than publishing fixed values — `build_wang2023_dlbilstm`'s exact
   layer sizes are a documented reasonable default consistent with its stated DNN+BiLSTM topology.
-- **Nazir et al. (2024)** and **Misrak & Melaku (2025)**: paywalled (ScienceDirect, Springer) — real
-  full-text access attempts failed (403 / auth redirect). Only abstract-level detail is verifiable;
-  `build_nazir2024_hybrid`/`build_misrak_melaku2025` use documented reasonable defaults, not sourced
-  architectures. Misrak & Melaku's "DNN-BiLSTMQ" naming indicates it extends Wang (2023)'s design, so
-  the same topology is reused for it (no independently-verified difference could be confirmed).
+- **Nazir et al. (2024)**: paywalled (ScienceDirect) — real full-text access attempts failed (403).
+  Only abstract-level detail is verifiable; `build_nazir2024_hybrid` uses a documented reasonable
+  default, not a sourced architecture.
+- **Misrak & Melaku (2025) — dropped from the comparison (2026-07-27), not silently omitted**:
+  paywalled (Springer, auth-redirect on real access attempts). Only abstract-level detail was
+  verifiable, and its "DNN-BiLSTMQ" naming/abstract indicated it extends Wang (2023)'s design with no
+  independently-verifiable architectural difference — `build_misrak_melaku2025` (still present in
+  `src/models.py`) reuses Wang's exact topology. Given Altaie & Hoomod alone was already projecting
+  ~30+ hours of additional GPU time, training a second run of an architecture already represented by
+  Wang (2023), under a different citation, was judged to add no genuinely new comparison point for
+  the compute cost. The final comparison table (Notebook 04 §18) is 8 models (CLEIDS-Edge + 7
+  baselines), not 9 — reported explicitly as a stated exclusion with reasoning, per this project's
+  standing rule (established for the SVM linear-fallback decision) that infeasibility must be
+  reported clearly, never silently skipped.
 
 ## 4. Evaluation metrics
 
