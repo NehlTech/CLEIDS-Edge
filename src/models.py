@@ -167,12 +167,20 @@ def build_standalone_cnn(input_dim):
     return model
 
 
-def build_standalone_lstm(input_dim):
+def build_standalone_lstm(input_dim, learning_rate=0.001):
     """Baseline 4: Standalone LSTM (no CNN component) -- LSTM-branch ablation
     of build_cleids_edge, isolating its contribution to the hybrid's
     performance. Same LSTM(100) size as build_cleids_edge's own LSTM layer,
     applied directly to the raw feature vector (reshaped as a length-input_dim
     sequence of 1 feature per step) rather than to CNN-extracted features.
+
+    learning_rate is exposed (default 0.001, matching every other baseline)
+    to diagnose a real training collapse observed on TON_IoT: the model got
+    stuck predicting the majority class for the entire run (auc~0.50,
+    accuracy pinned at the training-set majority-class fraction), unlike
+    every other model's TON_IoT result which discriminates fine (auc~0.94+)
+    and only has a bad *threshold*. A lower learning rate is the first thing
+    to rule out before treating that as a real architectural finding.
     """
     inputs = keras.Input(shape=(input_dim, 1), name="input")
     x = layers.LSTM(100, return_sequences=False, name="lstm")(inputs)
@@ -182,7 +190,7 @@ def build_standalone_lstm(input_dim):
 
     model = keras.Model(inputs=inputs, outputs=outputs, name="Standalone_LSTM")
     model.compile(
-        optimizer=keras.optimizers.Adam(learning_rate=0.001),
+        optimizer=keras.optimizers.Adam(learning_rate=learning_rate),
         loss="binary_crossentropy",
         metrics=["accuracy", tf.keras.metrics.AUC(name="auc"),
                  tf.keras.metrics.Precision(name="precision"), tf.keras.metrics.Recall(name="recall")],
