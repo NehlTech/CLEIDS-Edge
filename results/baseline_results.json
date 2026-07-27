@@ -584,5 +584,128 @@
       "size_mb": 0.189,
       "latency_ms_per_sample": 3.1875
     }
+  },
+  "altaie_hoomod2024": {
+    "cicids2017": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9801270630407647,
+        "precision": 0.9368438980584027,
+        "recall": 0.947212699009064,
+        "f1": 0.9419997664733585,
+        "auc": 0.9980097043309295,
+        "fpr": 0.013113520846929624
+      },
+      "tuned_threshold": {
+        "threshold": 0.05,
+        "accuracy": 0.9744620357824886,
+        "precision": 0.8735108812281619,
+        "recall": 0.9940512531504876,
+        "f1": 0.9298909740578298,
+        "auc": 0.9980097043309295,
+        "fpr": 0.02956087869269867
+      },
+      "train_time_sec": 847.36,
+      "epochs_run": 9,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/altaie_hoomod2024_cicids2017_binary.keras",
+      "n_params": 531329,
+      "size_mb": 2.125,
+      "latency_ms_per_sample": 10.9782
+    },
+    "unsw-nb15": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8265437496963514,
+        "precision": 0.769180089116979,
+        "recall": 0.9786464307773758,
+        "f1": 0.8613616285955596,
+        "auc": 0.9743944406552497,
+        "fpr": 0.3598108108108108
+      },
+      "tuned_threshold": {
+        "threshold": 0.86,
+        "accuracy": 0.8774474080551912,
+        "precision": 0.8415319610807458,
+        "recall": 0.9577781699461749,
+        "f1": 0.8958999649216929,
+        "auc": 0.9743944406552497,
+        "fpr": 0.22097297297297297
+      },
+      "train_time_sec": 1100.39,
+      "epochs_run": 30,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4223513513513514,
+        "fpr_after_retry": 0.3598108108108108
+      },
+      "checkpoint_path": "models/altaie_hoomod2024_unsw-nb15_binary.keras",
+      "n_params": 531329,
+      "size_mb": 2.125,
+      "latency_ms_per_sample": 11.492
+    },
+    "ton-iot": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.6891519497451701,
+        "precision": 0.5352550578516068,
+        "recall": 0.9977645305514158,
+        "f1": 0.6967406229674062,
+        "auc": 0.9293362673272858,
+        "fpr": 0.48285648361790495
+      },
+      "tuned_threshold": {
+        "threshold": 0.85,
+        "accuracy": 0.8535765082375252,
+        "precision": 0.744007932437515,
+        "recall": 0.9008113926146714,
+        "f1": 0.8149354905155141,
+        "auc": 0.9293362673272858,
+        "fpr": 0.17275034610059992
+      },
+      "train_time_sec": 1330.13,
+      "epochs_run": 11,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4823950161513613,
+        "fpr_after_retry": 0.48285648361790495
+      },
+      "checkpoint_path": "models/altaie_hoomod2024_ton-iot_binary.keras",
+      "n_params": 531329,
+      "size_mb": 2.125,
+      "latency_ms_per_sample": 10.0416
+    },
+    "iot-23": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9069366666666666,
+        "precision": 0.9068637274549098,
+        "recall": 0.9998747923947428,
+        "f1": 0.951100711271935,
+        "auc": 0.7510167478411367,
+        "fpr": 0.9801061474113388
+      },
+      "tuned_threshold": {
+        "threshold": 0.91,
+        "accuracy": 0.37001666666666666,
+        "precision": 0.999733649725175,
+        "recall": 0.30409244740359936,
+        "f1": 0.46633742485465074,
+        "auc": 0.7510167478411367,
+        "fpr": 0.0007732592878984921
+      },
+      "train_time_sec": 2849.84,
+      "epochs_run": 30,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.981019999297037,
+        "fpr_after_retry": 0.9801061474113388
+      },
+      "checkpoint_path": "models/altaie_hoomod2024_iot-23_binary.keras",
+      "n_params": 531329,
+      "size_mb": 2.125,
+      "latency_ms_per_sample": 8.4099
+    }
   }
 }
