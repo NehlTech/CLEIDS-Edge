@@ -272,7 +272,12 @@ def build_altaie_hoomod2024(input_dim):
     x = layers.Dropout(0.3, name="dropout1")(x)
     x = layers.Dense(64, activation="relu", name="fc2")(x)
     x = layers.Dropout(0.3, name="dropout2")(x)
-    outputs = layers.Dense(1, activation="sigmoid", name="output")(x)
+    # dtype="float32" keeps the sigmoid+BCE computation in full precision even
+    # under a mixed_float16 global policy -- recommended TF practice, and
+    # worth being deliberate about here given this project's severe class
+    # imbalance on some datasets (TON_IoT/IoT-23) where FP16 underflow risk
+    # on small probabilities is real.
+    outputs = layers.Dense(1, activation="sigmoid", name="output", dtype="float32")(x)
 
     model = keras.Model(inputs=inputs, outputs=outputs, name="AltaieHoomod2024")
     model.compile(
@@ -308,7 +313,9 @@ def build_wang2023_dlbilstm(input_dim):
     x = layers.Dropout(0.3, name="dropout1")(x)
     x = layers.Dense(64, activation="relu", name="dnn_hidden2")(x)
     x = layers.Dropout(0.3, name="dropout2")(x)
-    outputs = layers.Dense(1, activation="sigmoid", name="output")(x)
+    # dtype="float32" keeps sigmoid+BCE in full precision under a
+    # mixed_float16 global policy -- see build_altaie_hoomod2024's comment.
+    outputs = layers.Dense(1, activation="sigmoid", name="output", dtype="float32")(x)
 
     model = keras.Model(inputs=inputs, outputs=outputs, name="Wang2023_DLBiLSTM")
     model.compile(
@@ -342,7 +349,9 @@ def build_misrak_melaku2025(input_dim):
     x = layers.Dropout(0.3, name="dropout1")(x)
     x = layers.Dense(64, activation="relu", name="dnn_hidden2")(x)
     x = layers.Dropout(0.3, name="dropout2")(x)
-    outputs = layers.Dense(1, activation="sigmoid", name="output")(x)
+    # dtype="float32" keeps sigmoid+BCE in full precision under a
+    # mixed_float16 global policy -- see build_altaie_hoomod2024's comment.
+    outputs = layers.Dense(1, activation="sigmoid", name="output", dtype="float32")(x)
 
     model = keras.Model(inputs=inputs, outputs=outputs, name="MisrakMelaku2025")
     model.compile(
