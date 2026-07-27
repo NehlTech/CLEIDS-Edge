@@ -282,5 +282,307 @@
       "size_mb": 0.003,
       "latency_ms_per_sample": 0.0195
     }
+  },
+  "standalone_cnn": {
+    "nsl-kdd": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.7785663591199432,
+        "precision": 0.9126407746552995,
+        "recall": 0.6756798877892932,
+        "f1": 0.7764842840512224,
+        "auc": 0.9289218445812092,
+        "fpr": 0.08547008547008547
+      },
+      "tuned_threshold": {
+        "threshold": 0.91,
+        "accuracy": 0.7638839602555003,
+        "precision": 0.9188978134761268,
+        "recall": 0.6418608275539625,
+        "f1": 0.7557920814791026,
+        "auc": 0.9289218445812092,
+        "fpr": 0.07486355679126763
+      },
+      "train_time_sec": 152.99,
+      "epochs_run": 10,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/standalone_cnn_nsl-kdd_binary.keras",
+      "n_params": 34049,
+      "size_mb": 0.136,
+      "latency_ms_per_sample": 5.5523
+    },
+    "cicids2017": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9971781549721016,
+        "precision": 0.9876119657854293,
+        "recall": 0.9959298047871757,
+        "f1": 0.991753445158072,
+        "auc": 0.999867313962613,
+        "fpr": 0.002565479194863898
+      },
+      "tuned_threshold": {
+        "threshold": 0.29000000000000004,
+        "accuracy": 0.9971194776652833,
+        "precision": 0.9847921073352993,
+        "recall": 0.9985128132876219,
+        "f1": 0.9916049996890741,
+        "auc": 0.999867313962613,
+        "fpr": 0.003166662915966089
+      },
+      "train_time_sec": 836.94,
+      "epochs_run": 31,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/standalone_cnn_cicids2017_binary.keras",
+      "n_params": 34049,
+      "size_mb": 0.136,
+      "latency_ms_per_sample": 5.3884
+    },
+    "unsw-nb15": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8271631929262012,
+        "precision": 0.7630501708447511,
+        "recall": 0.9951027971410924,
+        "f1": 0.863762565820967,
+        "auc": 0.977029056200381,
+        "fpr": 0.3785945945945946
+      },
+      "tuned_threshold": {
+        "threshold": 0.79,
+        "accuracy": 0.8973667589758538,
+        "precision": 0.8663726308260817,
+        "recall": 0.961969469690285,
+        "f1": 0.9116718583404763,
+        "auc": 0.977029056200381,
+        "fpr": 0.1817837837837838
+      },
+      "train_time_sec": 300.45,
+      "epochs_run": 24,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4033243243243243,
+        "fpr_after_retry": 0.3785945945945946
+      },
+      "checkpoint_path": "models/standalone_cnn_unsw-nb15_binary.keras",
+      "n_params": 34049,
+      "size_mb": 0.136,
+      "latency_ms_per_sample": 5.5125
+    },
+    "ton-iot": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.6893149223657699,
+        "precision": 0.5353685612788632,
+        "recall": 0.9982199039576088,
+        "f1": 0.6969478004508931,
+        "auc": 0.9428011032236012,
+        "fpr": 0.48285648361790495
+      },
+      "tuned_threshold": {
+        "threshold": 0.93,
+        "accuracy": 0.8532653786891075,
+        "precision": 0.7457241379310345,
+        "recall": 0.895264116575592,
+        "f1": 0.8136804876213409,
+        "auc": 0.9428011032236012,
+        "fpr": 0.17014305491462853
+      },
+      "train_time_sec": 538.44,
+      "epochs_run": 18,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4848638670973696,
+        "fpr_after_retry": 0.48285648361790495
+      },
+      "checkpoint_path": "models/standalone_cnn_ton-iot_binary.keras",
+      "n_params": 34049,
+      "size_mb": 0.136,
+      "latency_ms_per_sample": 5.3129
+    },
+    "iot-23": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.90685,
+        "precision": 0.9067659631311782,
+        "recall": 0.9999005704311192,
+        "f1": 0.9510586018294573,
+        "auc": 0.7496196121040369,
+        "fpr": 0.9812660363431865
+      },
+      "tuned_threshold": {
+        "threshold": 0.98,
+        "accuracy": 0.36918666666666666,
+        "precision": 0.9998663864831707,
+        "recall": 0.30313497748104395,
+        "f1": 0.465225107099662,
+        "auc": 0.7496196121040369,
+        "fpr": 0.0003866296439492461
+      },
+      "train_time_sec": 605.58,
+      "epochs_run": 19,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.9811254437453868,
+        "fpr_after_retry": 0.9812660363431865
+      },
+      "checkpoint_path": "models/standalone_cnn_iot-23_binary.keras",
+      "n_params": 34049,
+      "size_mb": 0.136,
+      "latency_ms_per_sample": 4.8351
+    }
+  },
+  "standalone_lstm": {
+    "nsl-kdd": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8759758694109298,
+        "precision": 0.959695887148484,
+        "recall": 0.8164108158653471,
+        "f1": 0.8822736842105263,
+        "auc": 0.9200178062711498,
+        "fpr": 0.04530944289980435
+      },
+      "tuned_threshold": {
+        "threshold": 0.78,
+        "accuracy": 0.8372959545777147,
+        "precision": 0.9673635900050994,
+        "recall": 0.7391101067560196,
+        "f1": 0.8379715522572665,
+        "auc": 0.9200178062711498,
+        "fpr": 0.03295232210894861
+      },
+      "train_time_sec": 392.72,
+      "epochs_run": 9,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/standalone_lstm_nsl-kdd_binary.keras",
+      "n_params": 47329,
+      "size_mb": 0.189,
+      "latency_ms_per_sample": 3.6436
+    },
+    "cicids2017": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9834423308759989,
+        "precision": 0.9439167449235648,
+        "recall": 0.9598459587657916,
+        "f1": 0.951814710174175,
+        "auc": 0.998792322477113,
+        "fpr": 0.011711830459760876
+      },
+      "tuned_threshold": {
+        "threshold": 0.17,
+        "accuracy": 0.9768918097148283,
+        "precision": 0.8828685148459927,
+        "recall": 0.9965872978600165,
+        "f1": 0.9362875590134279,
+        "auc": 0.998792322477113,
+        "fpr": 0.027152928922080804
+      },
+      "train_time_sec": 2493.44,
+      "epochs_run": 34,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/standalone_lstm_cicids2017_binary.keras",
+      "n_params": 47329,
+      "size_mb": 0.189,
+      "latency_ms_per_sample": 3.1665
+    },
+    "unsw-nb15": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8098552203274547,
+        "precision": 0.7433777821515852,
+        "recall": 0.9998014647489633,
+        "f1": 0.8527295133629975,
+        "auc": 0.976104740163264,
+        "fpr": 0.42286486486486485
+      },
+      "tuned_threshold": {
+        "threshold": 0.8400000000000001,
+        "accuracy": 0.8789777972112909,
+        "precision": 0.8314838419434656,
+        "recall": 0.9785140739433513,
+        "f1": 0.8990271584920957,
+        "auc": 0.976104740163264,
+        "fpr": 0.24297297297297296
+      },
+      "train_time_sec": 1348.35,
+      "epochs_run": 50,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.46962162162162163,
+        "fpr_after_retry": 0.42286486486486485
+      },
+      "checkpoint_path": "models/standalone_lstm_unsw-nb15_binary.keras",
+      "n_params": 47329,
+      "size_mb": 0.189,
+      "latency_ms_per_sample": 4.3732
+    },
+    "ton-iot": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.3578878748370274,
+        "precision": 0.3578878748370274,
+        "recall": 1.0,
+        "f1": 0.5271243398943831,
+        "auc": 0.5001659136585888,
+        "fpr": 1.0
+      },
+      "tuned_threshold": {
+        "threshold": 0.01,
+        "accuracy": 0.3578878748370274,
+        "precision": 0.3578878748370274,
+        "recall": 1.0,
+        "f1": 0.5271243398943831,
+        "auc": 0.5001659136585888,
+        "fpr": 1.0
+      },
+      "train_time_sec": 1952.94,
+      "epochs_run": 21,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4954314720812183,
+        "fpr_after_retry": 1.0
+      },
+      "checkpoint_path": "models/standalone_lstm_ton-iot_binary.keras",
+      "n_params": 47329,
+      "size_mb": 0.189,
+      "latency_ms_per_sample": 3.1729
+    },
+    "iot-23": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9068133333333334,
+        "precision": 0.9067679719462303,
+        "recall": 0.9998526969349915,
+        "f1": 0.9510380507693871,
+        "auc": 0.6569940616762134,
+        "fpr": 0.9811957400442867
+      },
+      "tuned_threshold": {
+        "threshold": 0.9,
+        "accuracy": 0.3689866666666667,
+        "precision": 0.9995262563317663,
+        "recall": 0.3030171350290371,
+        "f1": 0.4650495094271375,
+        "auc": 0.6569940616762134,
+        "fpr": 0.001370777828547327
+      },
+      "train_time_sec": 2671.75,
+      "epochs_run": 41,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.9812660363431865,
+        "fpr_after_retry": 0.9811957400442867
+      },
+      "checkpoint_path": "models/standalone_lstm_iot-23_binary.keras",
+      "n_params": 47329,
+      "size_mb": 0.189,
+      "latency_ms_per_sample": 3.1875
+    }
   }
 }
