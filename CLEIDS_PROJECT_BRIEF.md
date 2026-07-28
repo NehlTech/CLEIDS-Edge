@@ -332,6 +332,36 @@ genuinely fair. **Fix applied**: Notebook 04 §4 now also loads `tuned_threshold
 `tuned_threshold_results.json` in Colab via Notebook 03 §10b (fast, no retraining, reloads the 5 saved
 checkpoints), (2) re-run Notebook 04 §16-§18.
 
+## 3d. Notebook 04 — genuine final comparison table (2026-07-28), reported honestly, not just the flattering parts
+
+8 models (CLEIDS-Edge + 7 baselines) x 5 datasets, all tuned-threshold F1, both sides of the comparison
+now genuinely apples-to-apples (see §3c). **CLEIDS-Edge is not uniformly best** — a real, nuanced
+picture:
+
+- **NSL-KDD**: CLEIDS-Edge (0.7365) is the *lowest* of all 8 models — Standalone LSTM (0.8380) and
+  Random Forest (0.8332) both clearly beat it, Altaie-Hoomod (0.7867) does too. Plausibly connected to
+  NSL-KDD's well-documented deliberate train/test distribution shift interacting worse with a more
+  complex hybrid than with simpler models — stated as a hypothesis, not confirmed.
+- **CICIDS2017**: CLEIDS-Edge (0.9950) essentially tied for best with Random Forest (0.9955).
+- **UNSW-NB15**: mid-pack (0.9051) — behind Standalone CNN/Nazir2024/Altaie-Hoomod/RF (0.908-0.913),
+  ahead of SVM/Wang2023. No standout either direction.
+- **TON_IoT**: CLEIDS-Edge (0.8161) sits in a tight cluster with SVM/Standalone CNN/Nazir2024/
+  Altaie-Hoomod/Wang2023 (all ~0.81-0.82) — but **Random Forest dominates at 0.9901**, a large gap.
+  Every deep-learning model hits roughly the same ceiling here, so this looks like a genuine
+  classical-ML advantage specific to this dataset, not a CLEIDS-Edge-specific weakness.
+- **IoT-23**: all 8 models converge to virtually identical F1 (~0.465, differing only in the 4th
+  decimal) — striking, clean confirmation this dataset has a real, architecture-independent ceiling
+  (consistent with §2c/§2d's AUC=0.75 finding), not a CLEIDS-Edge weakness.
+
+**Implication for the thesis's argument**: Random Forest is a surprisingly strong, competitive
+baseline overall, even outright dominating TON_IoT — raw detection F1 alone does not clearly favor
+CLEIDS-Edge over classical ML. The case for CLEIDS-Edge likely needs to rest at least as much on
+**efficiency/deployability** (model size: RF's checkpoints are 34-287MB vs. CLEIDS-Edge's roughly
+0.1-2MB range per `baseline_results.json`/model docstrings; CPU-only latency, still pending Notebook
+06) as on raw accuracy superiority. This is the real, honestly-reported result, not a uniform
+"CLEIDS-Edge wins everywhere" narrative — consistent with how every other finding in this project has
+been handled.
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
@@ -410,7 +440,8 @@ confirmed complete and their outputs shared back:
 - [x] Notebook 02 — CLEIDS-Edge architecture defined and sanity-checked
 - [x] Notebook 03 — CLEIDS-Edge trained on all 5 datasets (binary + multiclass), `main_results.json`
       and `tuned_threshold_results.json` saved, all figures/checkpoints pushed (2026-07-25)
-- [ ] Notebook 04 — all 8 baselines trained, `baseline_results.json` saved
+- [x] Notebook 04 — 7 baselines trained (Misrak & Melaku dropped, §3), `baseline_results.json` and
+      `tuned_threshold_results.json` (Youden's J) both genuinely complete and pushed (2026-07-28)
 - [ ] Notebook 05 — quantization/pruning applied, `compression_results.json` saved
 - [ ] Notebook 06 — CPU-only latency/throughput benchmark complete
 - [ ] Notebook 07 — `all_paper_numbers.json` printed, all figures exported to `figures/`
