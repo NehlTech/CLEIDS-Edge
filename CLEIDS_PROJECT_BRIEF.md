@@ -362,6 +362,44 @@ CLEIDS-Edge over classical ML. The case for CLEIDS-Edge likely needs to rest at 
 "CLEIDS-Edge wins everywhere" narrative — consistent with how every other finding in this project has
 been handled.
 
+## 3e. Notebook 05 — post-training quantization & pruning (built 2026-07-28)
+
+Applies **post-training INT8 dynamic-range quantization** (via `tf.lite.TFLiteConverter`,
+`Optimize.DEFAULT`) and **one-shot magnitude pruning** (30%/50%/70% sparsity, zero fine-tuning) to all
+10 CLEIDS-Edge checkpoints (5 datasets x binary/multiclass) from Notebook 03. No retraining anywhere,
+matching the project's own "Edge adaptation" framing (§2). A combined variant (50%-pruned, then
+quantized) is also evaluated, since prune+quantize together is the common real-world combination.
+
+**A real, necessary technical fix was required for TFLite conversion to work at all** with this
+architecture, found and verified locally (not assumed) before building the notebook: converting the
+Keras model's native dynamic-batch signature to TFLite fails outright
+(`TensorListReserve requires element_shape to be static`) because the LSTM layer's internal recurrence
+needs a static batch size. Rebuilding with a **fixed batch size baked into `Input()`** plus
+`LSTM(unroll=True)` (identical architecture and weights, transferred via `set_weights` — never changes
+what's reported as "ORIGINAL") resolves the conversion error. A second, separate failure was found and
+fixed the same way: even after conversion succeeded, invoking the interpreter initially produced `NaN`
+for every single output — traced (via a plain-non-quantized-TFLite control test, which also produced
+`NaN`, ruling out quantization as the cause) to how the fixed-batch export model was being built;
+using `tf.lite.TFLiteConverter.from_keras_model()` on a model with `batch_shape` set directly at the
+`Input()` layer (rather than manually tracing a `tf.function` concrete function) resolved it. Verified
+locally against a real checkpoint (NSL-KDD binary) before trusting the fix: quantized Acc=0.7668 vs.
+original Acc=0.7650 (negligible difference), TFLite size 220KB vs. 1548KB original (~86% smaller).
+
+**Pruning's real, achievable compression is measured via gzip** on the saved pruned model (standard
+practice in the pruning literature for reporting storage savings without specialized sparse-matrix
+runtime support) — one-shot pruning zeroes weight values but doesn't shrink a densely-stored array on
+its own; gzip is what actually captures the size benefit of having many zeros.
+
+**Evaluation protocol**: all variants evaluated at the same default 0.5 threshold as `main_results.json`
+(binary) — this notebook is scoped to "does compression preserve accuracy," not re-tuning the
+operating point (that's Notebook 03/04's already-settled scope). Multiclass uses argmax, no threshold
+involved. Every checkpoint's ORIGINAL accuracy is cross-checked against `main_results.json` before
+trusting any compressed number — confirmed for NSL-KDD binary (0.7650 exact match) and multiclass
+(0.6928 vs. 0.6928 real value) via a local functional smoke test before the notebook was run for real.
+
+**Incremental backup**: save + Drive backup + GitHub push happen after every single checkpoint, not
+deferred — directly applying the lesson from §3b's real data loss.
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
