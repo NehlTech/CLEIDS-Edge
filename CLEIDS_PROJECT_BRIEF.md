@@ -311,6 +311,27 @@ had actually reached GitHub — silently erasing both.
 later cell. Both are being genuinely retrained (no fabricated/reconstructed numbers used to paper over
 the loss, even though the real values were seen and reviewed at the time) — see Notebook 04 §12/§13.
 
+## 3c. Second real bug found in the same final table (2026-07-28) — CLEIDS-Edge row used the wrong file
+
+Once Nazir2024/Altaie-Hoomod were both genuinely complete, the printed final comparison table (Notebook
+04 §18) still showed `cleids_edge`'s F1 noticeably lower than most baselines on UNSW-NB15 and TON_IoT
+specifically — worth checking rather than accepting at face value, since it directly touches the
+thesis's central claim. Verified against the real files: the `cleids_edge` row's numbers were an
+**exact** match (4 decimal places, all 5 datasets) to `main_results.json`'s **default-threshold** F1,
+not tuned — despite the table's own header claiming "tuned-threshold F1." Every baseline row correctly
+used its tuned F1; only CLEIDS-Edge's row was silently reading the wrong file
+(`cleids_edge_results` / `main_results.json` instead of `tuned_threshold_results.json`), making the
+comparison apples-to-oranges and CLEIDS-Edge look worse than its real tuned performance.
+
+Compounding this: `results/tuned_threshold_results.json` itself still held the pre-Youden's-J (max-F1)
+values at the time (see §2d) — so fixing only the table's data source wasn't sufficient on its own;
+that file also needed regenerating via Notebook 03's updated §10b cell before the comparison was
+genuinely fair. **Fix applied**: Notebook 04 §4 now also loads `tuned_threshold_results.json`
+(`cleids_edge_tuned_results`), and §18's table reads CLEIDS-Edge's F1 from there instead of
+`main_results.json`. Sequence required for a correct final table: (1) regenerate
+`tuned_threshold_results.json` in Colab via Notebook 03 §10b (fast, no retraining, reloads the 5 saved
+checkpoints), (2) re-run Notebook 04 §16-§18.
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
