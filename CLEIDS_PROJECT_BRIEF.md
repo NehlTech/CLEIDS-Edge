@@ -440,6 +440,62 @@ trusting any compressed number — confirmed for NSL-KDD binary (0.7650 exact ma
 **Incremental backup**: save + Drive backup + GitHub push happen after every single checkpoint, not
 deferred — directly applying the lesson from §3b's real data loss.
 
+## 3f. Notebook 05 — real anomaly found: magnitude pruning is unreliable for TON_IoT and IoT-23
+multiclass (2026-07-28)
+
+All 10 checkpoints ran for real on Colab with the 16x8-quantization fix (§3e). Every ORIGINAL accuracy
+matched `main_results.json` exactly (diff=0.0000, all 10 checkpoints) — the loaded checkpoints and
+evaluation code are correct. 16x8 quantization held up across all 10 (largest drop: cicids2017
+multiclass, 0.9981→0.9784, still a real, usable model; every other checkpoint's quantized accuracy is
+within ~1 point of original, several exactly unchanged).
+
+**Magnitude pruning (30/50/70% sparsity, zero fine-tuning) tells a different, more honest story.**
+Three datasets behave as expected — graceful degradation, real damage only appearing at 70% sparsity:
+
+| Dataset (multiclass) | Original | 30% | 50% | 70% |
+|---|---|---|---|---|
+| NSL-KDD | 0.6928 | 0.6936 | 0.6946 | 0.4206 |
+| CICIDS2017 | 0.9981 | 0.9656 | 0.9590 | 0.6478 |
+| UNSW-NB15 | 0.6514 | 0.6359 | 0.6016 | 0.3364 |
+
+Two datasets do not:
+
+| Dataset (multiclass) | Original | 30% | 50% | 70% |
+|---|---|---|---|---|
+| TON_IoT | 0.8694 | **0.0426** | 0.1751 | 0.0465 |
+| IoT-23 | 0.6876 | 0.6876 | **0.0822** | 0.6592 |
+
+TON_IoT-multiclass collapses to near-random (AUC=0.543) at the *lowest* sparsity tested (30%) and never
+recovers. IoT-23-multiclass is untouched at 30%, collapses at 50% (AUC≈0.5), then *partially recovers*
+at 70% — a non-monotonic pattern that a simple "more pruning = more damage" story cannot explain.
+
+**Ruled out as a pipeline bug before treating this as a real finding**: the binary variants of both
+datasets, run through the exact same `prune_model_weights` function on the same code path, behave
+normally — TON_IoT-binary only breaks at 70% (the expected pattern, same as the three well-behaved
+datasets above), IoT-23-binary is stable throughout. So the fragility is specific to these two trained
+multiclass models, not a bug in the pruning or evaluation code.
+
+**Working explanation** (grounded in the actual pattern, not a guess): one-shot magnitude pruning zeroes
+the smallest-magnitude weights on the assumption that small magnitude means low importance. That
+assumption is reasonable for feedforward layers (Dense/Conv1D) but questionable for an LSTM's recurrent
+kernel, which governs a dynamical system replayed across ~29–40 unrolled timesteps — its important
+weights are the ones controlling the recurrence's stability (its spectral properties), not necessarily
+the largest-magnitude ones. Zeroing the wrong small entries can push that recurrence into instability,
+and exactly which entries get zeroed changes with the sparsity threshold in a way that need not be
+monotonic — consistent with the non-monotonic TON_IoT/IoT-23 pattern. This compounds with a separate,
+already-observed fragility: multiclass predictions use argmax (winner-take-all), so even a moderate drop
+in per-class probability ranking (TON_IoT-multiclass's 16x8-quantized AUC only fell from 0.993 to 0.940,
+a real but modest drop) can flip which class "wins," producing a much larger accuracy/F1 drop than the
+AUC drop alone would suggest.
+
+**This is reported as a genuine, honest limitation of post-training magnitude pruning (without
+fine-tuning) for this hybrid CNN-LSTM architecture on some datasets/tasks — not hidden or averaged away.**
+Consistent with how every other unfavorable-but-real finding in this project has been handled (Notebook
+04's non-uniform baseline comparison, the Standalone LSTM/TON_IoT training collapse in §2e). The thesis
+should report pruning results per-dataset rather than as a single blended number, and can cite this as
+evidence that magnitude pruning needs fine-tuning (or should be avoided) specifically for the LSTM
+component on TON_IoT- and IoT-23-like data, while 16x8 quantization remains reliable everywhere.
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
@@ -520,6 +576,9 @@ confirmed complete and their outputs shared back:
       and `tuned_threshold_results.json` saved, all figures/checkpoints pushed (2026-07-25)
 - [x] Notebook 04 — 7 baselines trained (Misrak & Melaku dropped, §3), `baseline_results.json` and
       `tuned_threshold_results.json` (Youden's J) both genuinely complete and pushed (2026-07-28)
-- [ ] Notebook 05 — quantization/pruning applied, `compression_results.json` saved
+- [x] Notebook 05 — quantization/pruning applied, `compression_results.json` saved. 16x8 quantization
+  (revised from INT8 dynamic-range, §3e) holds up across all 10 checkpoints. Magnitude pruning is real
+  and mostly reliable, but genuinely unreliable for TON_IoT/IoT-23 multiclass — see §3f, reported
+  honestly rather than hidden. Complete and pushed (2026-07-28).
 - [ ] Notebook 06 — CPU-only latency/throughput benchmark complete
 - [ ] Notebook 07 — `all_paper_numbers.json` printed, all figures exported to `figures/`
