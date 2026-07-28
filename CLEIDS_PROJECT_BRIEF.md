@@ -15,8 +15,10 @@ project, so the session has full context without needing prior chat history.
 - **System name:** CLEIDS-Edge (CNN-LSTM Edge Intrusion Detection System)
 - **Core model:** Hybrid CNN + LSTM classifier — CNN layers extract spatial traffic features,
   LSTM layers learn temporal attack sequences.
-- **Edge adaptation:** Post-training INT8 dynamic quantization + magnitude pruning, to fit
-  within the memory/latency envelope of low-cost IoT edge hardware.
+- **Edge adaptation:** Post-training quantization + magnitude pruning, to fit within the
+  memory/latency envelope of low-cost IoT edge hardware. Quantization scheme is 16x8 (INT16
+  activations / INT8 weights), not pure INT8 dynamic-range — a real TFLite converter bug forced
+  this change, see §3e.
 - **Framework:** TensorFlow / Keras (chosen for edge conversion path via TFLite).
 - **Training compute:** Google Colab Pro, GPU runtime (L4).
 - **Latency/throughput benchmarking compute:** CPU-only, single-thread — must NOT be measured
@@ -362,13 +364,14 @@ CLEIDS-Edge over classical ML. The case for CLEIDS-Edge likely needs to rest at 
 "CLEIDS-Edge wins everywhere" narrative — consistent with how every other finding in this project has
 been handled.
 
-## 3e. Notebook 05 — post-training quantization & pruning (built 2026-07-28)
+## 3e. Notebook 05 — post-training quantization & pruning (built 2026-07-28, quantization scheme
+revised 2026-07-28 after real Colab failures)
 
-Applies **post-training INT8 dynamic-range quantization** (via `tf.lite.TFLiteConverter`,
-`Optimize.DEFAULT`) and **one-shot magnitude pruning** (30%/50%/70% sparsity, zero fine-tuning) to all
-10 CLEIDS-Edge checkpoints (5 datasets x binary/multiclass) from Notebook 03. No retraining anywhere,
-matching the project's own "Edge adaptation" framing (§2). A combined variant (50%-pruned, then
-quantized) is also evaluated, since prune+quantize together is the common real-world combination.
+Applies **post-training quantization** (via `tf.lite.TFLiteConverter`) and **one-shot magnitude
+pruning** (30%/50%/70% sparsity, zero fine-tuning) to all 10 CLEIDS-Edge checkpoints (5 datasets x
+binary/multiclass) from Notebook 03. No retraining anywhere, matching the project's own "Edge
+adaptation" framing (§2). A combined variant (50%-pruned, then quantized) is also evaluated, since
+prune+quantize together is the common real-world combination.
 
 **A real, necessary technical fix was required for TFLite conversion to work at all** with this
 architecture, found and verified locally (not assumed) before building the notebook: converting the
@@ -384,6 +387,43 @@ using `tf.lite.TFLiteConverter.from_keras_model()` on a model with `batch_shape`
 `Input()` layer (rather than manually tracing a `tf.function` concrete function) resolved it. Verified
 locally against a real checkpoint (NSL-KDD binary) before trusting the fix: quantized Acc=0.7668 vs.
 original Acc=0.7650 (negligible difference), TFLite size 220KB vs. 1548KB original (~86% smaller).
+
+**A third, more serious real bug appeared during the actual Colab run (not caught by local smoke
+testing, since it's environment-specific), forcing a change to the quantization scheme itself.** The
+notebook originally scoped **post-training INT8 dynamic-range quantization** (weights INT8,
+activations float, no calibration needed) per the project brief's "Edge adaptation" line. On Colab's
+real runtime (TF 2.20.0, differs from the local dev environment's TF 2.21.0), that failed outright:
+`tensorflow/lite/kernels/fully_connected.cc:220 input->type != kTfLiteFloat32 (INT8 != FLOAT32)`, a
+genuine TFLite converter bug in how it handles the unrolled LSTM's ~116 decomposed `FULLY_CONNECTED`
+gate ops (one per timestep x gate). Diagnosed step by step, not guessed:
+1. Toggling `converter._experimental_new_quantizer` (MLIR vs. legacy TOCO quantizer) — same error,
+   ruled out.
+2. Removing `unroll=True` to test whether it was even necessary — this instead hit a completely
+   unrelated, GPU-specific failure (`ConverterError: 'tf.CudnnRNNV3' op is neither a custom op nor a
+   flex op`), because Colab's L4 GPU makes Keras auto-select a fused cuDNN LSTM kernel when not
+   unrolled, and that fused kernel is an opaque custom op TFLite cannot translate at all. This
+   confirmed `unroll=True` is genuinely required (independent of the quantization bug), and that this
+   specific crash (not the FULLY_CONNECTED one) is the GPU-caused one — `unroll=True` disables the
+   cuDNN fast path regardless of device, so it does not explain the FULLY_CONNECTED bug.
+3. Switching to full-INT8 quantization (8-bit weights AND activations, calibrated via a representative
+   dataset) converted without error, but silently collapsed accuracy: recall=1.0, FPR=1.0 (predicting
+   every sample positive), AUC=0.484 (statistical noise) — 8-bit activation ranges are too coarse for
+   the LSTM's recurrent state, a known RNN-quantization failure mode, not a fixable bug.
+4. **16x8 quantization** (INT16 activations, INT8 weights — TensorFlow's own documented mitigation for
+   RNN activation-quantization sensitivity) — verified against the real NSL-KDD binary checkpoint:
+   Acc=0.7649 (original 0.7649), F1=0.7577 (original 0.7578), FPR=0.0775 (original 0.0778). Numerically
+   faithful, unlike both INT8 paths. Adopted as the real fix.
+
+This is a **disclosed methodology deviation** from the originally-scoped "INT8 dynamic-range"
+quantization, same disclosure discipline as Notebook 04's Altaie-Hoomod batch-size change (§3) — the
+thesis should describe the compression scheme as 16x8 (16-bit activations / 8-bit weights), not pure
+INT8, and can cite the real TFLite converter limitation as the reason, itself a legitimate finding
+about deploying hybrid CNN-LSTM architectures on TFLite. Because 16x8 requires a representative dataset
+for calibration, the data bridge cell was extended to also copy each dataset's real **validation**
+split (never test) purely for that purpose — test data remains untouched by the compression pipeline.
+Re-verified via a full local functional smoke test (both binary and multiclass, NSL-KDD) after the
+fix: quantized Acc=0.7649 (orig 0.7650) and Acc=0.6929 (orig 0.6928) respectively, ~17.3% of original
+size, no collapse.
 
 **Pruning's real, achievable compression is measured via gzip** on the saved pruned model (standard
 practice in the pruning literature for reporting storage savings without specialized sparse-matrix
