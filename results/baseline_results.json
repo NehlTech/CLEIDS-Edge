@@ -589,123 +589,123 @@
     "cicids2017": {
       "default_threshold": {
         "threshold": 0.5,
-        "accuracy": 0.9801270630407647,
-        "precision": 0.9368438980584027,
-        "recall": 0.947212699009064,
-        "f1": 0.9419997664733585,
-        "auc": 0.9980097043309295,
-        "fpr": 0.013113520846929624
+        "accuracy": 0.9948924071564977,
+        "precision": 0.9881207461557853,
+        "recall": 0.9818250129150425,
+        "f1": 0.9849628192947052,
+        "auc": 0.9997782664863469,
+        "fpr": 0.002424024201663382
       },
       "tuned_threshold": {
         "threshold": 0.05,
-        "accuracy": 0.9744620357824886,
-        "precision": 0.8735108812281619,
-        "recall": 0.9940512531504876,
-        "f1": 0.9298909740578298,
-        "auc": 0.9980097043309295,
-        "fpr": 0.02956087869269867
+        "accuracy": 0.9963593398269552,
+        "precision": 0.9796961325966851,
+        "recall": 0.9993425069271592,
+        "f1": 0.9894218027108084,
+        "auc": 0.9997782664863469,
+        "fpr": 0.004253294454642778
       },
-      "train_time_sec": 847.36,
-      "epochs_run": 9,
+      "train_time_sec": 2786.65,
+      "epochs_run": 30,
       "fpr_retry_triggered": false,
       "retry_note": null,
       "checkpoint_path": "models/altaie_hoomod2024_cicids2017_binary.keras",
       "n_params": 531329,
       "size_mb": 2.125,
-      "latency_ms_per_sample": 10.9782
+      "latency_ms_per_sample": 10.4105
     },
     "unsw-nb15": {
       "default_threshold": {
         "threshold": 0.5,
-        "accuracy": 0.8265437496963514,
-        "precision": 0.769180089116979,
-        "recall": 0.9786464307773758,
-        "f1": 0.8613616285955596,
-        "auc": 0.9743944406552497,
-        "fpr": 0.3598108108108108
+        "accuracy": 0.8300174901617839,
+        "precision": 0.7679429519298185,
+        "recall": 0.9906247242565958,
+        "f1": 0.8651850995578418,
+        "auc": 0.9780666619367979,
+        "fpr": 0.36675675675675673
       },
       "tuned_threshold": {
-        "threshold": 0.86,
-        "accuracy": 0.8774474080551912,
-        "precision": 0.8415319610807458,
-        "recall": 0.9577781699461749,
-        "f1": 0.8958999649216929,
-        "auc": 0.9743944406552497,
-        "fpr": 0.22097297297297297
+        "threshold": 0.87,
+        "accuracy": 0.8952898022640042,
+        "precision": 0.8664284430958418,
+        "recall": 0.9574252183887761,
+        "f1": 0.9096567985328792,
+        "auc": 0.9780666619367979,
+        "fpr": 0.18083783783783783
       },
-      "train_time_sec": 1100.39,
+      "train_time_sec": 1172.04,
       "epochs_run": 30,
       "fpr_retry_triggered": true,
       "retry_note": {
-        "fpr_before_retry": 0.4223513513513514,
-        "fpr_after_retry": 0.3598108108108108
+        "fpr_before_retry": 0.418972972972973,
+        "fpr_after_retry": 0.36675675675675673
       },
       "checkpoint_path": "models/altaie_hoomod2024_unsw-nb15_binary.keras",
       "n_params": 531329,
       "size_mb": 2.125,
-      "latency_ms_per_sample": 11.492
+      "latency_ms_per_sample": 11.1953
     },
     "ton-iot": {
       "default_threshold": {
         "threshold": 0.5,
-        "accuracy": 0.6891519497451701,
-        "precision": 0.5352550578516068,
+        "accuracy": 0.6902334953182411,
+        "precision": 0.5361242103389982,
         "recall": 0.9977645305514158,
-        "f1": 0.6967406229674062,
-        "auc": 0.9293362673272858,
-        "fpr": 0.48285648361790495
+        "f1": 0.6974765597870124,
+        "auc": 0.9335832762516647,
+        "fpr": 0.48117212736502074
       },
       "tuned_threshold": {
-        "threshold": 0.85,
-        "accuracy": 0.8535765082375252,
-        "precision": 0.744007932437515,
-        "recall": 0.9008113926146714,
-        "f1": 0.8149354905155141,
-        "auc": 0.9293362673272858,
-        "fpr": 0.17275034610059992
+        "threshold": 0.92,
+        "accuracy": 0.8593398127296432,
+        "precision": 0.7595227980742,
+        "recall": 0.8881851299884087,
+        "f1": 0.8188306236165178,
+        "auc": 0.9335832762516647,
+        "fpr": 0.15673742501153667
       },
-      "train_time_sec": 1330.13,
-      "epochs_run": 11,
+      "train_time_sec": 1484.06,
+      "epochs_run": 12,
       "fpr_retry_triggered": true,
       "retry_note": {
-        "fpr_before_retry": 0.4823950161513613,
-        "fpr_after_retry": 0.48285648361790495
+        "fpr_before_retry": 0.48024919243193354,
+        "fpr_after_retry": 0.48117212736502074
       },
       "checkpoint_path": "models/altaie_hoomod2024_ton-iot_binary.keras",
       "n_params": 531329,
       "size_mb": 2.125,
-      "latency_ms_per_sample": 10.0416
+      "latency_ms_per_sample": 10.1532
     },
     "iot-23": {
       "default_threshold": {
         "threshold": 0.5,
-        "accuracy": 0.9069366666666666,
-        "precision": 0.9068637274549098,
-        "recall": 0.9998747923947428,
-        "f1": 0.951100711271935,
-        "auc": 0.7510167478411367,
-        "fpr": 0.9801061474113388
+        "accuracy": 0.9069433333333333,
+        "precision": 0.9068725033066574,
+        "recall": 0.9998711098181176,
+        "f1": 0.951103871651385,
+        "auc": 0.7505769507140204,
+        "fpr": 0.980000702962989
       },
       "tuned_threshold": {
-        "threshold": 0.91,
-        "accuracy": 0.37001666666666666,
-        "precision": 0.999733649725175,
-        "recall": 0.30409244740359936,
-        "f1": 0.46633742485465074,
-        "auc": 0.7510167478411367,
-        "fpr": 0.0007732592878984921
+        "threshold": 0.99,
+        "accuracy": 0.36923666666666666,
+        "precision": 0.9999392687963076,
+        "recall": 0.30316812067067084,
+        "f1": 0.4652720280095739,
+        "auc": 0.7505769507140204,
+        "fpr": 0.0001757407472496573
       },
-      "train_time_sec": 2849.84,
+      "train_time_sec": 3180.3,
       "epochs_run": 30,
       "fpr_retry_triggered": true,
       "retry_note": {
-        "fpr_before_retry": 0.981019999297037,
-        "fpr_after_retry": 0.9801061474113388
+        "fpr_before_retry": 0.9808442585497874,
+        "fpr_after_retry": 0.980000702962989
       },
       "checkpoint_path": "models/altaie_hoomod2024_iot-23_binary.keras",
       "n_params": 531329,
       "size_mb": 2.125,
-      "latency_ms_per_sample": 8.4099
+      "latency_ms_per_sample": 8.5611
     }
   },
   "wang2023_dlbilstm": {
@@ -857,6 +857,157 @@
       "n_params": 58625,
       "size_mb": 0.234,
       "latency_ms_per_sample": 6.3046
+    }
+  },
+  "nazir2024": {
+    "nsl-kdd": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.7832682753726047,
+        "precision": 0.9178672836260385,
+        "recall": 0.6801215615990026,
+        "f1": 0.7813087458598156,
+        "auc": 0.8937792020291112,
+        "fpr": 0.08042426114715272
+      },
+      "tuned_threshold": {
+        "threshold": 0.98,
+        "accuracy": 0.7489797728885734,
+        "precision": 0.9132488479262673,
+        "recall": 0.6177043559572976,
+        "f1": 0.7369497513131595,
+        "auc": 0.8937792020291112,
+        "fpr": 0.07754093296261971
+      },
+      "train_time_sec": 462.68,
+      "epochs_run": 15,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/nazir2024_nsl-kdd_binary.keras",
+      "n_params": 113857,
+      "size_mb": 0.455,
+      "latency_ms_per_sample": 7.6671
+    },
+    "cicids2017": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9984210470165257,
+        "precision": 0.9922530062380411,
+        "recall": 0.9985284678845943,
+        "f1": 0.9953808461166337,
+        "auc": 0.9998587910088312,
+        "fpr": 0.001601013332133109
+      },
+      "tuned_threshold": {
+        "threshold": 0.18000000000000002,
+        "accuracy": 0.9978476096998923,
+        "precision": 0.98782600624942,
+        "recall": 0.9996869080605519,
+        "f1": 0.9937210659404785,
+        "auc": 0.9998587910088312,
+        "fpr": 0.002530115446563769
+      },
+      "train_time_sec": 1439.72,
+      "epochs_run": 26,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/nazir2024_cicids2017_binary.keras",
+      "n_params": 113857,
+      "size_mb": 0.455,
+      "latency_ms_per_sample": 7.5958
+    },
+    "unsw-nb15": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8103653500461546,
+        "precision": 0.744524346294986,
+        "recall": 0.9980587664343069,
+        "f1": 0.8528477582680654,
+        "auc": 0.9777817677268728,
+        "fpr": 0.4195945945945946
+      },
+      "tuned_threshold": {
+        "threshold": 0.91,
+        "accuracy": 0.8996623427100034,
+        "precision": 0.8706877587344759,
+        "recall": 0.9604032471543281,
+        "f1": 0.9133476687470499,
+        "auc": 0.9777817677268728,
+        "fpr": 0.17475675675675675
+      },
+      "train_time_sec": 389.97,
+      "epochs_run": 18,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4227837837837838,
+        "fpr_after_retry": 0.4195945945945946
+      },
+      "checkpoint_path": "models/nazir2024_unsw-nb15_binary.keras",
+      "n_params": 113857,
+      "size_mb": 0.455,
+      "latency_ms_per_sample": 7.9907
+    },
+    "ton-iot": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.6891815811307337,
+        "precision": 0.5353086309986885,
+        "recall": 0.9969779764861733,
+        "f1": 0.6965941138187866,
+        "auc": 0.9338761182982815,
+        "fpr": 0.48237194277803414
+      },
+      "tuned_threshold": {
+        "threshold": 0.88,
+        "accuracy": 0.8549691833590138,
+        "precision": 0.7472379969024264,
+        "recall": 0.898782911077993,
+        "f1": 0.8160342786265997,
+        "auc": 0.9338761182982815,
+        "fpr": 0.1694508537148131
+      },
+      "train_time_sec": 808.7,
+      "epochs_run": 11,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.48140286109829256,
+        "fpr_after_retry": 0.48237194277803414
+      },
+      "checkpoint_path": "models/nazir2024_ton-iot_binary.keras",
+      "n_params": 113857,
+      "size_mb": 0.455,
+      "latency_ms_per_sample": 7.5743
+    },
+    "iot-23": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9067566666666667,
+        "precision": 0.9066105769230769,
+        "recall": 0.9999963174233748,
+        "f1": 0.9510164270867444,
+        "auc": 0.7499937937821283,
+        "fpr": 0.9831640364134828
+      },
+      "tuned_threshold": {
+        "threshold": 0.99,
+        "accuracy": 0.3691966666666667,
+        "precision": 0.9999028229920801,
+        "recall": 0.30313497748104395,
+        "f1": 0.4652290511002535,
+        "auc": 0.7499937937821283,
+        "fpr": 0.0002811851955994517
+      },
+      "train_time_sec": 1010.08,
+      "epochs_run": 16,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.9810551474464869,
+        "fpr_after_retry": 0.9831640364134828
+      },
+      "checkpoint_path": "models/nazir2024_iot-23_binary.keras",
+      "n_params": 113857,
+      "size_mb": 0.455,
+      "latency_ms_per_sample": 6.2106
     }
   }
 }
