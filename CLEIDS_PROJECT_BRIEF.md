@@ -496,6 +496,52 @@ should report pruning results per-dataset rather than as a single blended number
 evidence that magnitude pruning needs fine-tuning (or should be avoided) specifically for the LSTM
 component on TON_IoT- and IoT-23-like data, while 16x8 quantization remains reliable everywhere.
 
+## 3g. Notebook 06 — CPU-only latency/throughput benchmark (built 2026-07-28)
+
+Measures per-sample inference latency, throughput, real model size, and peak memory for CLEIDS-Edge
+(original checkpoints and the 16x8-quantized TFLite artifacts, §3e) and all 7 baselines from §3, all
+CPU-only with threading forced to 1 (`tf.config.set_visible_devices([], "GPU")`, both TF thread-pool
+sizes set to 1, and `OMP_NUM_THREADS`/`MKL_NUM_THREADS`/`OPENBLAS_NUM_THREADS` set to `"1"` before
+NumPy/scikit-learn are imported). This is the number set behind Contribution 1's edge-deployability
+claim, so single-thread CPU fidelity matters more here than anywhere else in the project.
+
+**A real problem found while planning this notebook**: Random Forest and SVM were never saved as
+model artifacts in Notebook 04 — `train_and_evaluate_baseline()` fits and evaluates them in-session and
+lets them go out of scope; only their metrics reached `baseline_results.json`. There is nothing on disk
+to load for a genuine latency benchmark. Rather than fabricate numbers or silently drop these two
+baselines from Notebook 06, **both are retrained fresh inside Notebook 06** using the identical
+`build_random_forest`/`build_svm` functions, hyperparameters, and `random_state=42` as Notebook 04 —
+deterministic training on the same real data is a genuine re-derivation of the same model, not a
+different one. Random Forest trains with `n_jobs=-1` (practical training time — a local smoke test on
+NSL-KDD alone took ~6 minutes at `n_jobs=-1`) but is explicitly set to `n_jobs=1` before its latency is
+measured, since the reported number must reflect single-core edge deployment even though training
+speed doesn't need to.
+
+**Methodology decision, disclosed**: latency is measured at batch size 1 only (true single-sample
+inference — the realistic edge scenario, since an IoT device processes one flow/packet at a time, not
+a batch). Throughput is derived from that same measurement as `1000 / latency_ms_mean` rather than a
+separate large-batch run, keeping the methodology identical and directly comparable across Keras,
+TFLite, and scikit-learn runtimes. Each measurement discards the first 20 calls as warmup before timing
+200 real calls, recording mean, std, and p95 (ms), not just the mean.
+
+**Peak memory** uses `resource.getrusage().ru_maxrss` delta before/after a short inference run — a real
+measurement with a disclosed limitation: whole-process peak RSS, not perfectly isolated to one model in
+a shared Python/TensorFlow process. Directionally meaningful within this benchmark run, not a
+laboratory-grade isolated measurement.
+
+**Pruning is deliberately not latency-benchmarked.** §3f already established that one-shot magnitude
+pruning zeroes weights but stores them densely — without a sparse-aware runtime (which TFLite's
+standard interpreter does not provide), a pruned model runs at the *same* latency as the unpruned one;
+only its gzip-compressed storage size differs, already measured correctly in Notebook 05. Benchmarking
+pruned-model latency here would produce a real but trivially uninformative number (identical to
+unquantized original) that could misleadingly imply a speed benefit that doesn't exist.
+
+**Verified locally before running on Colab**: a full functional smoke test against real NSL-KDD
+checkpoints and data (both CLEIDS-Edge tasks, all 5 keras baselines, and a genuine RF+SVM retrain) ran
+end to end with no crashes or NaNs and directionally sane numbers — e.g. the 16x8-quantized TFLite
+artifact ran ~5x faster than the original `.keras` checkpoint (14.6ms vs. 71.2ms on the binary task),
+consistent with quantization's expected benefit.
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
