@@ -280,6 +280,37 @@ missing, use a reasonable default and note the assumption in the notebook markdo
   standing rule (established for the SVM linear-fallback decision) that infeasibility must be
   reported clearly, never silently skipped.
 
+## 3b. Real data loss, investigated and fixed (2026-07-28) — Nazir2024 and Altaie-Hoomod's NSL-KDD
+
+**What was lost**: Nazir2024's complete real results (all 5 datasets, genuinely trained and reviewed
+in detail at the time) and Altaie-Hoomod's NSL-KDD result (rescued once already after an earlier
+interrupt, see §3's fidelity note) both disappeared from `results/baseline_results.json` by the time
+Notebook 04's final comparison table printed — showing as `N/A` despite real training having happened.
+
+**Investigated, not assumed**: used the Google Drive Revisions API (`drive_service.revisions().list`
++ `get_media`) to pull every historical revision of the actual Drive-backed `baseline_results.json`
+(50 revisions). Nazir2024 never appears in any of them. Altaie-Hoomod's NSL-KDD is already missing in
+the very first revision where `altaie_hoomod2024` appears at all. Two other Drive files sharing the
+same filename were also checked and ruled out — confirmed unrelated (different model names, dated
+weeks before this project's baseline work started). Conclusion: genuinely unrecoverable from either
+GitHub or Drive version history, not a lookup/display bug.
+
+**Root cause**: both `train_and_evaluate_baseline()`-calling cells originally called
+`save_baseline_results()` only once, *after* their entire 5-dataset loop finished — while
+`backup_run_to_drive()` (called *inside* `train_and_evaluate_baseline`, once per dataset) always
+copies whatever is *already on local disk* to Drive. Since the model's own results hadn't been saved
+locally yet during its own loop, every one of those per-dataset Drive backups was structurally
+guaranteed to copy a stale, pre-this-model snapshot. Nothing within either cell ever pushed to GitHub
+either (Nazir2024's cell had no push call at all; Altaie-Hoomod's NSL-KDD rescue was a manual local
+save that was never followed by a Drive backup or GitHub push before that session ended). A later
+fresh Colab session's `git pull` (to continue with the batch_size=256 change) then restored only what
+had actually reached GitHub — silently erasing both.
+
+**Fix**: both cells now call `save_baseline_results()`, an explicit Drive copy, and
+`push_checkpoint_to_github()` after *every single dataset*, not once per model and not deferred to a
+later cell. Both are being genuinely retrained (no fabricated/reconstructed numbers used to paper over
+the loss, even though the real values were seen and reviewed at the time) — see Notebook 04 §12/§13.
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
