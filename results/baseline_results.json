@@ -707,5 +707,156 @@
       "size_mb": 2.125,
       "latency_ms_per_sample": 8.4099
     }
+  },
+  "wang2023_dlbilstm": {
+    "nsl-kdd": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.7674769339957417,
+        "precision": 0.9193459286266711,
+        "recall": 0.6484064521156394,
+        "f1": 0.7604642661305063,
+        "auc": 0.9366402505485761,
+        "fpr": 0.07517248481103903
+      },
+      "tuned_threshold": {
+        "threshold": 0.9400000000000001,
+        "accuracy": 0.7534155429382541,
+        "precision": 0.9210465385505904,
+        "recall": 0.6199641549131146,
+        "f1": 0.7410926365795725,
+        "auc": 0.9366402505485761,
+        "fpr": 0.07022963649469674
+      },
+      "train_time_sec": 1204.7,
+      "epochs_run": 23,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/wang2023_dlbilstm_nsl-kdd_binary.keras",
+      "n_params": 58625,
+      "size_mb": 0.234,
+      "latency_ms_per_sample": 7.5364
+    },
+    "cicids2017": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9978102695955533,
+        "precision": 0.9909223966118585,
+        "recall": 0.9962742059205686,
+        "f1": 0.9935910946660109,
+        "auc": 0.9999011938224298,
+        "fpr": 0.0018742786599068326
+      },
+      "tuned_threshold": {
+        "threshold": 0.22,
+        "accuracy": 0.9968687655361506,
+        "precision": 0.9821310492241923,
+        "recall": 0.9998121448363312,
+        "f1": 0.9908927296986999,
+        "auc": 0.9999011938224298,
+        "fpr": 0.0037356977749772547
+      },
+      "train_time_sec": 3722.88,
+      "epochs_run": 45,
+      "fpr_retry_triggered": false,
+      "retry_note": null,
+      "checkpoint_path": "models/wang2023_dlbilstm_cicids2017_binary.keras",
+      "n_params": 58625,
+      "size_mb": 0.234,
+      "latency_ms_per_sample": 6.2947
+    },
+    "unsw-nb15": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.8114706311033377,
+        "precision": 0.745083530649829,
+        "recall": 0.999580870025589,
+        "f1": 0.8537702076346233,
+        "auc": 0.9622431096940054,
+        "fpr": 0.419
+      },
+      "tuned_threshold": {
+        "threshold": 0.88,
+        "accuracy": 0.8690424136423262,
+        "precision": 0.8383804748099977,
+        "recall": 0.9441674755139857,
+        "f1": 0.8881349601593626,
+        "auc": 0.9622431096940054,
+        "fpr": 0.223
+      },
+      "train_time_sec": 1989.88,
+      "epochs_run": 50,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4227567567567568,
+        "fpr_after_retry": 0.419
+      },
+      "checkpoint_path": "models/wang2023_dlbilstm_unsw-nb15_binary.keras",
+      "n_params": 58625,
+      "size_mb": 0.234,
+      "latency_ms_per_sample": 8.8039
+    },
+    "ton-iot": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.6830182529335072,
+        "precision": 0.5303800532558702,
+        "recall": 0.9977231329690346,
+        "f1": 0.6925873241662716,
+        "auc": 0.9188841653234899,
+        "fpr": 0.49238578680203043
+      },
+      "tuned_threshold": {
+        "threshold": 0.88,
+        "accuracy": 0.8514874955552921,
+        "precision": 0.7418868957962481,
+        "recall": 0.8971684053651267,
+        "f1": 0.8121720881427072,
+        "auc": 0.9188841653234899,
+        "fpr": 0.17397323488694047
+      },
+      "train_time_sec": 1755.46,
+      "epochs_run": 14,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.4843331795108445,
+        "fpr_after_retry": 0.49238578680203043
+      },
+      "checkpoint_path": "models/wang2023_dlbilstm_ton-iot_binary.keras",
+      "n_params": 58625,
+      "size_mb": 0.234,
+      "latency_ms_per_sample": 6.2808
+    },
+    "iot-23": {
+      "default_threshold": {
+        "threshold": 0.5,
+        "accuracy": 0.9068633333333334,
+        "precision": 0.9067780761164322,
+        "recall": 0.9999005704311192,
+        "f1": 0.9510652644114994,
+        "auc": 0.75046929517941,
+        "fpr": 0.9811254437453868
+      },
+      "tuned_threshold": {
+        "threshold": 0.98,
+        "accuracy": 0.36923666666666666,
+        "precision": 0.9998542698921598,
+        "recall": 0.3031938987070473,
+        "f1": 0.46529318183744806,
+        "auc": 0.75046929517941,
+        "fpr": 0.00042177779339917754
+      },
+      "train_time_sec": 4091.61,
+      "epochs_run": 50,
+      "fpr_retry_triggered": true,
+      "retry_note": {
+        "fpr_before_retry": 0.9814066289409863,
+        "fpr_after_retry": 0.9811254437453868
+      },
+      "checkpoint_path": "models/wang2023_dlbilstm_iot-23_binary.keras",
+      "n_params": 58625,
+      "size_mb": 0.234,
+      "latency_ms_per_sample": 6.3046
+    }
   }
 }
