@@ -198,5 +198,45 @@
     "throughput_samples_per_sec": 16.02,
     "size_mb": 0.4617,
     "peak_memory_mb": 0.0
+  },
+  "standalone_lstm_nsl-kdd_binary": {
+    "latency_ms_mean": 67.14630313502084,
+    "latency_ms_std": 2.507939289932008,
+    "latency_ms_p95": 72.24355154991143,
+    "throughput_samples_per_sec": 14.89,
+    "size_mb": 0.6025,
+    "peak_memory_mb": 0.0
+  },
+  "standalone_lstm_cicids2017_binary": {
+    "latency_ms_mean": 65.25186341000108,
+    "latency_ms_std": 3.6281269696934766,
+    "latency_ms_p95": 69.62436955011526,
+    "throughput_samples_per_sec": 15.33,
+    "size_mb": 0.6025,
+    "peak_memory_mb": 0.0
+  },
+  "standalone_lstm_unsw-nb15_binary": {
+    "latency_ms_mean": 75.00141397999528,
+    "latency_ms_std": 2.850988223944728,
+    "latency_ms_p95": 80.16773685004637,
+    "throughput_samples_per_sec": 13.33,
+    "size_mb": 0.6025,
+    "peak_memory_mb": 0.0
+  },
+  "standalone_lstm_ton-iot_binary": {
+    "latency_ms_mean": 65.63776594000842,
+    "latency_ms_std": 2.5535829846999683,
+    "latency_ms_p95": 70.62770334999867,
+    "throughput_samples_per_sec": 15.24,
+    "size_mb": 0.6025,
+    "peak_memory_mb": 0.0
+  },
+  "standalone_lstm_iot-23_binary": {
+    "latency_ms_mean": 65.41422253999372,
+    "latency_ms_std": 2.493800450742781,
+    "latency_ms_p95": 70.05620964989703,
+    "throughput_samples_per_sec": 15.29,
+    "size_mb": 0.6025,
+    "peak_memory_mb": 0.0
   }
 }
