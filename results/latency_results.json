@@ -1,35 +1,35 @@
 {
   "cleids_edge_nsl-kdd_binary__original": {
-    "latency_ms_mean": 61.42294651500151,
-    "latency_ms_std": 1.8986256791530989,
-    "latency_ms_p95": 64.39748284991538,
-    "throughput_samples_per_sec": 16.28,
+    "latency_ms_mean": 80.08840379499361,
+    "latency_ms_std": 21.21650249592051,
+    "latency_ms_p95": 132.00097774994785,
+    "throughput_samples_per_sec": 12.49,
     "size_mb": 1.5477,
-    "peak_memory_mb": 0.445
+    "peak_memory_mb": 0.125
   },
   "cleids_edge_nsl-kdd_binary__quantized": {
-    "latency_ms_mean": 2.2919952200072657,
-    "latency_ms_std": 0.026490010956777832,
-    "latency_ms_p95": 2.340921599932244,
-    "throughput_samples_per_sec": 436.3,
+    "latency_ms_mean": 3.1785739699955684,
+    "latency_ms_std": 0.28589524303113784,
+    "latency_ms_p95": 3.5987396999757926,
+    "throughput_samples_per_sec": 314.61,
     "size_mb": 0.2729,
-    "peak_memory_mb": 0.074
+    "peak_memory_mb": 0.078
   },
   "cleids_edge_nsl-kdd_multiclass__original": {
-    "latency_ms_mean": 60.58656828999915,
-    "latency_ms_std": 1.7703073261878304,
-    "latency_ms_p95": 64.1244338500428,
-    "throughput_samples_per_sec": 16.51,
+    "latency_ms_mean": 79.2509733599968,
+    "latency_ms_std": 19.872726670814554,
+    "latency_ms_p95": 130.5457725999929,
+    "throughput_samples_per_sec": 12.62,
     "size_mb": 1.5782,
     "peak_memory_mb": 0.0
   },
   "cleids_edge_nsl-kdd_multiclass__quantized": {
-    "latency_ms_mean": 2.295928560001812,
-    "latency_ms_std": 0.012608198540399594,
-    "latency_ms_p95": 2.3179132999985086,
-    "throughput_samples_per_sec": 435.55,
+    "latency_ms_mean": 2.948563025001363,
+    "latency_ms_std": 0.3238168906638815,
+    "latency_ms_p95": 3.580473549959603,
+    "throughput_samples_per_sec": 339.15,
     "size_mb": 0.277,
-    "peak_memory_mb": 0.051
+    "peak_memory_mb": 0.07
   },
   "cleids_edge_cicids2017_binary__original": {
     "latency_ms_mean": 60.19972023499804,
