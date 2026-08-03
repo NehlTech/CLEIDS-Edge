@@ -62,5 +62,37 @@
     "throughput_samples_per_sec": 678.18,
     "size_mb": 0.2335,
     "peak_memory_mb": 0.0
+  },
+  "cleids_edge_unsw-nb15_binary__original": {
+    "latency_ms_mean": 61.77879217499367,
+    "latency_ms_std": 1.6083309841583726,
+    "latency_ms_p95": 64.61806460009711,
+    "throughput_samples_per_sec": 16.19,
+    "size_mb": 1.5477,
+    "peak_memory_mb": 0.0
+  },
+  "cleids_edge_unsw-nb15_binary__quantized": {
+    "latency_ms_mean": 3.6845912249964385,
+    "latency_ms_std": 0.07407362743339237,
+    "latency_ms_p95": 3.746959700140451,
+    "throughput_samples_per_sec": 271.4,
+    "size_mb": 0.3399,
+    "peak_memory_mb": 0.0
+  },
+  "cleids_edge_unsw-nb15_multiclass__original": {
+    "latency_ms_mean": 62.17462054498583,
+    "latency_ms_std": 1.7500699779746438,
+    "latency_ms_p95": 65.41788400010091,
+    "throughput_samples_per_sec": 16.08,
+    "size_mb": 1.5548,
+    "peak_memory_mb": 0.0
+  },
+  "cleids_edge_unsw-nb15_multiclass__quantized": {
+    "latency_ms_mean": 3.6544130999936897,
+    "latency_ms_std": 0.03200502431154869,
+    "latency_ms_p95": 3.7036713501152008,
+    "throughput_samples_per_sec": 273.64,
+    "size_mb": 0.3409,
+    "peak_memory_mb": 0.0
   }
 }
