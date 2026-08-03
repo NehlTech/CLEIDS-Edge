@@ -542,6 +542,41 @@ end to end with no crashes or NaNs and directionally sane numbers — e.g. the 1
 artifact ran ~5x faster than the original `.keras` checkpoint (14.6ms vs. 71.2ms on the binary task),
 consistent with quantization's expected benefit.
 
+## 3h. Notebook 06 — real peak-memory bug found in the actual Colab results, fixed via subprocess
+isolation (2026-07-28)
+
+All 55 entries ran for real on Colab (CLEIDS-Edge original + quantized x 5 datasets x 2 tasks = 20,
+5 keras baselines x 5 datasets = 25, RF+SVM x 5 datasets = 10). Latency and throughput are real and
+sane — quantized latency scales with each dataset's real feature count (UNSW-NB15's 194 features gives
+the slowest quantized latency at 3.65-3.68ms; CICIDS2017/TON_IoT/IoT-23's 76-78 features give the
+fastest at ~1.4-1.5ms; NSL-KDD's 122 sits in between at 2.29ms) — a physically sensible relationship,
+not noise. Model sizes are real (Random Forest 150-287MB serialized, matching 200-tree ensembles;
+linear-SVM 3.5-6.3KB).
+
+**Peak memory was broken**, caught by reviewing the actual numbers rather than trusting them: only 3 of
+55 entries had a nonzero `peak_memory_mb` (all three belonging to `cleids_edge_nsl-kdd_binary`/
+`multiclass`, the very first model processed) — every other entry, including Random Forest checkpoints
+150-287MB in size, read exactly `0.00MB`. Root cause: `resource.getrusage().ru_maxrss` is a cumulative,
+process-wide high-water mark that never resets for the life of the Python process; across 55 sequential
+benchmarks sharing one long-running Colab process, only the very first model measured can ever set a
+new "peak," regardless of how much memory later, genuinely different models use. A `0.00MB` reading did
+not mean "this model uses no memory" — it meant "this particular call didn't happen to be the process's
+all-time high," which almost none of them, after the first, ever would be.
+
+**Real fix**: `scripts/measure_peak_memory_worker.py`, a standalone script that loads/runs exactly one
+model in its own fresh, isolated Python subprocess, so `ru_maxrss` at the end genuinely is that model's
+own real peak — the standard, correct way to do per-model memory profiling. Notebook 06's new §9 calls
+this worker once per entry (55 total) via `subprocess.run`, overwriting only the `peak_memory_mb` field
+of each existing `results/latency_results.json` entry — latency/throughput/size from the original run
+are untouched and were already correct. Verified locally before running on Colab: four representative
+spec kinds (CLEIDS-Edge original, CLEIDS-Edge quantized, a Keras baseline, and SVM) each produced real,
+distinct nonzero peak-memory values (422.8MB, 492.4MB, 172.3MB, 101.4MB respectively) — a stark, working
+contrast to the broken in-process `0.00MB` readings.
+
+Consistent with the project's standing practice of catching a measurement methodology's own flaws by
+checking whether the real numbers make sense, rather than accepting a clean-looking table at face value
+(same discipline as the Notebook 04 default-vs-tuned-threshold bug, §3c).
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
