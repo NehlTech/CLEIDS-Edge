@@ -64,34 +64,34 @@
     "peak_memory_mb": 0.0
   },
   "cleids_edge_unsw-nb15_binary__original": {
-    "latency_ms_mean": 61.77879217499367,
-    "latency_ms_std": 1.6083309841583726,
-    "latency_ms_p95": 64.61806460009711,
-    "throughput_samples_per_sec": 16.19,
+    "latency_ms_mean": 83.19978651499808,
+    "latency_ms_std": 20.255892751551464,
+    "latency_ms_p95": 132.58985130001972,
+    "throughput_samples_per_sec": 12.02,
     "size_mb": 1.5477,
     "peak_memory_mb": 0.0
   },
   "cleids_edge_unsw-nb15_binary__quantized": {
-    "latency_ms_mean": 3.6845912249964385,
-    "latency_ms_std": 0.07407362743339237,
-    "latency_ms_p95": 3.746959700140451,
-    "throughput_samples_per_sec": 271.4,
+    "latency_ms_mean": 5.035118729999795,
+    "latency_ms_std": 0.6056828898104948,
+    "latency_ms_p95": 6.0636198999929976,
+    "throughput_samples_per_sec": 198.61,
     "size_mb": 0.3399,
     "peak_memory_mb": 0.0
   },
   "cleids_edge_unsw-nb15_multiclass__original": {
-    "latency_ms_mean": 62.17462054498583,
-    "latency_ms_std": 1.7500699779746438,
-    "latency_ms_p95": 65.41788400010091,
-    "throughput_samples_per_sec": 16.08,
+    "latency_ms_mean": 112.93411538999578,
+    "latency_ms_std": 68.74852271602832,
+    "latency_ms_p95": 276.63539870000005,
+    "throughput_samples_per_sec": 8.85,
     "size_mb": 1.5548,
     "peak_memory_mb": 0.0
   },
   "cleids_edge_unsw-nb15_multiclass__quantized": {
-    "latency_ms_mean": 3.6544130999936897,
-    "latency_ms_std": 0.03200502431154869,
-    "latency_ms_p95": 3.7036713501152008,
-    "throughput_samples_per_sec": 273.64,
+    "latency_ms_mean": 4.870692780004333,
+    "latency_ms_std": 0.8220567186481865,
+    "latency_ms_p95": 5.664436499966989,
+    "throughput_samples_per_sec": 205.31,
     "size_mb": 0.3409,
     "peak_memory_mb": 0.0
   },
