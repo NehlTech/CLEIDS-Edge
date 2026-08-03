@@ -422,5 +422,21 @@
     "throughput_samples_per_sec": 542.61,
     "size_mb": 0.0035,
     "peak_memory_mb": 0.0
+  },
+  "random_forest_iot-23_binary": {
+    "latency_ms_mean": 11.114886135001143,
+    "latency_ms_std": 0.35813723398067354,
+    "latency_ms_p95": 11.828194299823732,
+    "throughput_samples_per_sec": 89.97,
+    "size_mb": 217.5476,
+    "peak_memory_mb": 0.0
+  },
+  "svm_iot-23_binary": {
+    "latency_ms_mean": 1.8173795350116961,
+    "latency_ms_std": 0.19338060625896736,
+    "latency_ms_p95": 2.2278487499079347,
+    "throughput_samples_per_sec": 550.24,
+    "size_mb": 0.0035,
+    "peak_memory_mb": 0.0
   }
 }
