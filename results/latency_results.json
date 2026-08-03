@@ -238,5 +238,45 @@
     "throughput_samples_per_sec": 15.29,
     "size_mb": 0.6025,
     "peak_memory_mb": 0.0
+  },
+  "nazir2024_nsl-kdd_binary": {
+    "latency_ms_mean": 68.3117260349934,
+    "latency_ms_std": 2.218585944822773,
+    "latency_ms_p95": 72.6923979499702,
+    "throughput_samples_per_sec": 14.64,
+    "size_mb": 2.3503,
+    "peak_memory_mb": 0.0
+  },
+  "nazir2024_cicids2017_binary": {
+    "latency_ms_mean": 65.47918113000378,
+    "latency_ms_std": 2.3550462925144733,
+    "latency_ms_p95": 69.66620534996082,
+    "throughput_samples_per_sec": 15.27,
+    "size_mb": 2.3503,
+    "peak_memory_mb": 0.0
+  },
+  "nazir2024_unsw-nb15_binary": {
+    "latency_ms_mean": 72.78031701499117,
+    "latency_ms_std": 2.3857482233734637,
+    "latency_ms_p95": 77.28712749985789,
+    "throughput_samples_per_sec": 13.74,
+    "size_mb": 2.3503,
+    "peak_memory_mb": 0.0
+  },
+  "nazir2024_ton-iot_binary": {
+    "latency_ms_mean": 70.0574922349972,
+    "latency_ms_std": 20.49741318053526,
+    "latency_ms_p95": 77.29296774995191,
+    "throughput_samples_per_sec": 14.27,
+    "size_mb": 2.3503,
+    "peak_memory_mb": 0.0
+  },
+  "nazir2024_iot-23_binary": {
+    "latency_ms_mean": 69.37698237500967,
+    "latency_ms_std": 2.8460473301303617,
+    "latency_ms_p95": 74.23645104988736,
+    "throughput_samples_per_sec": 14.41,
+    "size_mb": 2.3503,
+    "peak_memory_mb": 0.0
   }
 }
