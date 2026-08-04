@@ -365,7 +365,7 @@
     "latency_ms_p95": 17.13180439928691,
     "throughput_samples_per_sec": 72.44,
     "size_mb": 34.0049,
-    "peak_memory_mb": 0.0
+    "peak_memory_mb": 5359.473
   },
   "svm_nsl-kdd_binary": {
     "latency_ms_mean": 3.4756617649918553,
@@ -373,7 +373,7 @@
     "latency_ms_p95": 5.8125235494571825,
     "throughput_samples_per_sec": 287.71,
     "size_mb": 0.0046,
-    "peak_memory_mb": 0.0
+    "peak_memory_mb": 5359.473
   },
   "random_forest_cicids2017_binary": {
     "latency_ms_mean": 13.967044450037065,
