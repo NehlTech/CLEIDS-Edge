@@ -592,6 +592,51 @@ threshold bug, §3c) — and, when a real fix turns out not to work either, repo
 substituting a real, defensible alternative rather than forcing a broken number into the results
 (same discipline as the SVM linear-fallback and Misrak & Melaku exclusions, §3).
 
+## 3i. Notebook 07 — final consolidated results & figures (built 2026-08-04)
+
+Consolidates every real result from Notebooks 03–06 into `results/all_paper_numbers.json` and produces
+the four cross-cutting figures supporting the three contributions (§5): `baseline_comparison_f1.png`
+(tuned F1, all 8 models, per dataset), `efficiency_frontier.png` (F1 vs. mean latency, CLEIDS-Edge
+original→quantized shown as an explicit arrow), `compression_tradeoff.png` (accuracy/size/latency,
+original vs. quantized, per dataset), and `cross_model_f1_heatmap.png` (models × datasets).
+
+**No GPU, no raw data, no model checkpoints needed** — unlike every other notebook, all five inputs
+(`main_results.json`, `tuned_threshold_results.json`, `baseline_results.json`,
+`compression_results.json`, `latency_results.json`) are already real results tracked in git; a plain
+clone/pull is sufficient. Fully validated locally against this project's actual, complete
+`results/*.json` files before being considered done — not a smoke test on a data subset, the real
+consolidation and all four real figures, run and visually inspected.
+
+**A real bug was caught by that visual inspection, not just by the code running without error**: the
+efficiency-frontier figure's legend, placed in-plot at `loc="lower left"`, sat exactly on top of SVM's
+real data point (the fastest model, with a mid-range F1 — precisely the "lower left" region of the
+plot), silently hiding a genuine result. A viewer would have seen 7 baseline points and assumed SVM was
+simply missing from the data, not realized it was hidden under the legend box. Fixed by moving the
+legend outside the axes entirely (`bbox_to_anchor`). This is the same category of lesson as every other
+real bug in this project (Notebook 04's default-vs-tuned bug, Notebook 06's peak-memory measurement) —
+a clean-looking output is not the same as a correct one, and has to actually be checked.
+
+**The consolidated heatmap independently reconfirms two findings already documented from earlier
+notebooks** — not new anomalies, cross-checked against existing project brief entries: the near-uniform
+~0.465 tuned F1 across every single model on IoT-23 (RF, SVM, CNN, LSTM, hybrid alike — a genuine
+dataset-level ceiling, §2c, not a CLEIDS-Edge weakness), and Standalone LSTM's real TON_IoT training
+collapse (F1=0.527, visibly lighter than every other cell in that row, §2e).
+
+**Headline numbers** (mean tuned F1 across all 5 datasets, binary task): CLEIDS-Edge=0.7836, Random
+Forest=0.8387 (still the strongest baseline overall, consistent with §3d's honest finding that
+CLEIDS-Edge is not uniformly best), SVM=0.7124 (weakest but by far the fastest), Altaie-Hoomod
+2024=0.7940, Standalone CNN=0.7876, Nazir 2024=0.7851, Wang 2023 DL-BiLSTM=0.7795, Standalone
+LSTM=0.7331 (dragged down by the real TON_IoT collapse). CLEIDS-Edge's 16x8 quantization cuts mean
+latency from 93.3ms to 3.4ms (a real 27.0x speedup) for no measurable accuracy loss — moving it from the
+middle of the deep-learning baseline cluster to a position competitive with the classical ML models on
+speed while keeping deep-learning-level accuracy, the central evidence for Contribution 1.
+
+**Scope notes carried forward honestly**: baselines are binary-only (Notebook 04's scope), so
+CLEIDS-Edge's multiclass results have no comparison counterpart and are stored as CLEIDS-Edge-only
+insight in `all_paper_numbers.json`, not blended into the comparison figures. Peak memory is absent
+throughout — genuinely infeasible to measure in the Colab sandbox (§3h); model size is the
+memory-footprint proxy used everywhere.
+
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
@@ -682,4 +727,7 @@ confirmed complete and their outputs shared back:
   x 5 datasets) real, verified clean (no NaNs, no missing fields). Peak memory dropped as a metric —
   genuinely infeasible in the Colab sandbox, see §3h; model size used as the proxy instead. Complete
   and pushed (2026-08-04).
-- [ ] Notebook 07 — `all_paper_numbers.json` printed, all figures exported to `figures/`
+- [x] Notebook 07 — `all_paper_numbers.json` printed, all 4 cross-cutting figures exported to
+  `figures/`. Built and fully validated locally against the real, complete results (not a subset) —
+  see §3i for the real legend-placement bug caught by visual inspection. Complete and pushed
+  (2026-08-04).
