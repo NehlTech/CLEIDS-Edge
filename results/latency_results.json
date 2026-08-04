@@ -200,42 +200,42 @@
     "peak_memory_mb": 0.0
   },
   "standalone_lstm_nsl-kdd_binary": {
-    "latency_ms_mean": 67.14630313502084,
-    "latency_ms_std": 2.507939289932008,
-    "latency_ms_p95": 72.24355154991143,
-    "throughput_samples_per_sec": 14.89,
+    "latency_ms_mean": 87.8186911349974,
+    "latency_ms_std": 20.01143472179234,
+    "latency_ms_p95": 139.41105429998967,
+    "throughput_samples_per_sec": 11.39,
     "size_mb": 0.6025,
     "peak_memory_mb": 0.0
   },
   "standalone_lstm_cicids2017_binary": {
-    "latency_ms_mean": 65.25186341000108,
-    "latency_ms_std": 3.6281269696934766,
-    "latency_ms_p95": 69.62436955011526,
-    "throughput_samples_per_sec": 15.33,
+    "latency_ms_mean": 93.34407787000146,
+    "latency_ms_std": 43.991916624617275,
+    "latency_ms_p95": 143.3174185499865,
+    "throughput_samples_per_sec": 10.71,
     "size_mb": 0.6025,
     "peak_memory_mb": 0.0
   },
   "standalone_lstm_unsw-nb15_binary": {
-    "latency_ms_mean": 75.00141397999528,
-    "latency_ms_std": 2.850988223944728,
-    "latency_ms_p95": 80.16773685004637,
-    "throughput_samples_per_sec": 13.33,
+    "latency_ms_mean": 96.00704253999993,
+    "latency_ms_std": 17.911533977847846,
+    "latency_ms_p95": 137.74782165012311,
+    "throughput_samples_per_sec": 10.42,
     "size_mb": 0.6025,
     "peak_memory_mb": 0.0
   },
   "standalone_lstm_ton-iot_binary": {
-    "latency_ms_mean": 65.63776594000842,
-    "latency_ms_std": 2.5535829846999683,
-    "latency_ms_p95": 70.62770334999867,
-    "throughput_samples_per_sec": 15.24,
+    "latency_ms_mean": 110.3462135899963,
+    "latency_ms_std": 61.04821586136521,
+    "latency_ms_p95": 221.60988259987553,
+    "throughput_samples_per_sec": 9.06,
     "size_mb": 0.6025,
     "peak_memory_mb": 0.0
   },
   "standalone_lstm_iot-23_binary": {
-    "latency_ms_mean": 65.41422253999372,
-    "latency_ms_std": 2.493800450742781,
-    "latency_ms_p95": 70.05620964989703,
-    "throughput_samples_per_sec": 15.29,
+    "latency_ms_mean": 93.17577059999279,
+    "latency_ms_std": 22.95727553688081,
+    "latency_ms_p95": 142.3992871500218,
+    "throughput_samples_per_sec": 10.73,
     "size_mb": 0.6025,
     "peak_memory_mb": 0.0
   },
