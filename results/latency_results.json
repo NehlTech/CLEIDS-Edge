@@ -84,31 +84,31 @@
     "size_mb": 0.3409
   },
   "cleids_edge_ton-iot_binary__original": {
-    "latency_ms_mean": 84.93783732999702,
-    "latency_ms_std": 18.916170783561096,
-    "latency_ms_p95": 131.5814564499362,
-    "throughput_samples_per_sec": 11.77,
+    "latency_ms_mean": 82.2142673799317,
+    "latency_ms_std": 19.113276337539524,
+    "latency_ms_p95": 127.41488534902594,
+    "throughput_samples_per_sec": 12.16,
     "size_mb": 1.5477
   },
   "cleids_edge_ton-iot_binary__quantized": {
-    "latency_ms_mean": 1.7230858300024465,
-    "latency_ms_std": 0.11938657427679358,
-    "latency_ms_p95": 1.9210643499491196,
-    "throughput_samples_per_sec": 580.35,
+    "latency_ms_mean": 1.735851880039263,
+    "latency_ms_std": 0.18164188662033132,
+    "latency_ms_p95": 1.8982125513502968,
+    "throughput_samples_per_sec": 576.09,
     "size_mb": 0.2283
   },
   "cleids_edge_ton-iot_multiclass__original": {
-    "latency_ms_mean": 93.97167354000091,
-    "latency_ms_std": 18.474334271534666,
-    "latency_ms_p95": 138.83313034999102,
-    "throughput_samples_per_sec": 10.64,
+    "latency_ms_mean": 80.17881820989714,
+    "latency_ms_std": 19.823148858308283,
+    "latency_ms_p95": 131.72391859934578,
+    "throughput_samples_per_sec": 12.47,
     "size_mb": 1.5548
   },
   "cleids_edge_ton-iot_multiclass__quantized": {
-    "latency_ms_mean": 1.78053903000432,
-    "latency_ms_std": 0.14442001266015364,
-    "latency_ms_p95": 2.0561954999493532,
-    "throughput_samples_per_sec": 561.63,
+    "latency_ms_mean": 2.837804285081802,
+    "latency_ms_std": 0.42052752206172395,
+    "latency_ms_p95": 3.620040500936736,
+    "throughput_samples_per_sec": 352.39,
     "size_mb": 0.2293
   },
   "cleids_edge_iot-23_binary__original": {
