@@ -101,7 +101,7 @@
     "latency_ms_p95": 131.5814564499362,
     "throughput_samples_per_sec": 11.77,
     "size_mb": 1.5477,
-    "peak_memory_mb": 0.0
+    "peak_memory_mb": 5359.473
   },
   "cleids_edge_ton-iot_binary__quantized": {
     "latency_ms_mean": 1.7230858300024465,
@@ -109,7 +109,7 @@
     "latency_ms_p95": 1.9210643499491196,
     "throughput_samples_per_sec": 580.35,
     "size_mb": 0.2283,
-    "peak_memory_mb": 0.0
+    "peak_memory_mb": 5359.473
   },
   "cleids_edge_ton-iot_multiclass__original": {
     "latency_ms_mean": 93.97167354000091,
@@ -117,7 +117,7 @@
     "latency_ms_p95": 138.83313034999102,
     "throughput_samples_per_sec": 10.64,
     "size_mb": 1.5548,
-    "peak_memory_mb": 0.0
+    "peak_memory_mb": 5359.473
   },
   "cleids_edge_ton-iot_multiclass__quantized": {
     "latency_ms_mean": 1.78053903000432,
@@ -125,7 +125,7 @@
     "latency_ms_p95": 2.0561954999493532,
     "throughput_samples_per_sec": 561.63,
     "size_mb": 0.2293,
-    "peak_memory_mb": 0.0
+    "peak_memory_mb": 5359.473
   },
   "cleids_edge_iot-23_binary__original": {
     "latency_ms_mean": 94.6458033650026,
