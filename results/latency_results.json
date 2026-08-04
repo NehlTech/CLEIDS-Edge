@@ -329,17 +329,17 @@
     "size_mb": 0.0046
   },
   "random_forest_cicids2017_binary": {
-    "latency_ms_mean": 13.967044450037065,
-    "latency_ms_std": 1.9022180704511733,
-    "latency_ms_p95": 16.496330900690733,
-    "throughput_samples_per_sec": 71.6,
+    "latency_ms_mean": 14.373335055115604,
+    "latency_ms_std": 1.878353334689356,
+    "latency_ms_p95": 17.21819445101573,
+    "throughput_samples_per_sec": 69.57,
     "size_mb": 150.224
   },
   "svm_cicids2017_binary": {
-    "latency_ms_mean": 2.205669015033891,
-    "latency_ms_std": 0.6388178759559391,
-    "latency_ms_p95": 3.111297600207763,
-    "throughput_samples_per_sec": 453.38,
+    "latency_ms_mean": 2.079399155009014,
+    "latency_ms_std": 0.6867852980794732,
+    "latency_ms_p95": 3.0700529025125425,
+    "throughput_samples_per_sec": 480.91,
     "size_mb": 0.0035
   },
   "random_forest_unsw-nb15_binary": {
