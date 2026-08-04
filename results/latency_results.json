@@ -175,38 +175,38 @@
     "size_mb": 0.4617
   },
   "standalone_lstm_nsl-kdd_binary": {
-    "latency_ms_mean": 87.8186911349974,
-    "latency_ms_std": 20.01143472179234,
-    "latency_ms_p95": 139.41105429998967,
-    "throughput_samples_per_sec": 11.39,
+    "latency_ms_mean": 98.78226650993383,
+    "latency_ms_std": 23.56910858969197,
+    "latency_ms_p95": 148.8649524484572,
+    "throughput_samples_per_sec": 10.12,
     "size_mb": 0.6025
   },
   "standalone_lstm_cicids2017_binary": {
-    "latency_ms_mean": 93.34407787000146,
-    "latency_ms_std": 43.991916624617275,
-    "latency_ms_p95": 143.3174185499865,
-    "throughput_samples_per_sec": 10.71,
+    "latency_ms_mean": 91.6961137150247,
+    "latency_ms_std": 20.53484150137206,
+    "latency_ms_p95": 144.2300836506547,
+    "throughput_samples_per_sec": 10.91,
     "size_mb": 0.6025
   },
   "standalone_lstm_unsw-nb15_binary": {
-    "latency_ms_mean": 96.00704253999993,
-    "latency_ms_std": 17.911533977847846,
-    "latency_ms_p95": 137.74782165012311,
-    "throughput_samples_per_sec": 10.42,
+    "latency_ms_mean": 100.14901599501172,
+    "latency_ms_std": 26.111329574137773,
+    "latency_ms_p95": 144.94914000060814,
+    "throughput_samples_per_sec": 9.99,
     "size_mb": 0.6025
   },
   "standalone_lstm_ton-iot_binary": {
-    "latency_ms_mean": 110.3462135899963,
-    "latency_ms_std": 61.04821586136521,
-    "latency_ms_p95": 221.60988259987553,
-    "throughput_samples_per_sec": 9.06,
+    "latency_ms_mean": 90.6208862549829,
+    "latency_ms_std": 19.83897651267264,
+    "latency_ms_p95": 137.31942675130995,
+    "throughput_samples_per_sec": 11.03,
     "size_mb": 0.6025
   },
   "standalone_lstm_iot-23_binary": {
-    "latency_ms_mean": 93.17577059999279,
-    "latency_ms_std": 22.95727553688081,
-    "latency_ms_p95": 142.3992871500218,
-    "throughput_samples_per_sec": 10.73,
+    "latency_ms_mean": 93.4634922951227,
+    "latency_ms_std": 22.977653504738594,
+    "latency_ms_p95": 142.82117984985229,
+    "throughput_samples_per_sec": 10.7,
     "size_mb": 0.6025
   },
   "nazir2024_nsl-kdd_binary": {
