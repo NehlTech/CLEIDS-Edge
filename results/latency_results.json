@@ -140,38 +140,38 @@
     "size_mb": 0.229
   },
   "standalone_cnn_nsl-kdd_binary": {
-    "latency_ms_mean": 90.58743727001229,
-    "latency_ms_std": 20.198509987220284,
-    "latency_ms_p95": 137.49005774999432,
-    "throughput_samples_per_sec": 11.04,
+    "latency_ms_mean": 84.60494787985226,
+    "latency_ms_std": 23.059151522035624,
+    "latency_ms_p95": 136.99822439957643,
+    "throughput_samples_per_sec": 11.82,
     "size_mb": 0.4617
   },
   "standalone_cnn_cicids2017_binary": {
-    "latency_ms_mean": 88.7540152249983,
-    "latency_ms_std": 22.32354530992671,
-    "latency_ms_p95": 144.04571559992974,
-    "throughput_samples_per_sec": 11.27,
+    "latency_ms_mean": 82.95618113981618,
+    "latency_ms_std": 20.903516546217222,
+    "latency_ms_p95": 134.2669317502441,
+    "throughput_samples_per_sec": 12.05,
     "size_mb": 0.4617
   },
   "standalone_cnn_unsw-nb15_binary": {
-    "latency_ms_mean": 88.68444124999657,
-    "latency_ms_std": 21.51648040964169,
-    "latency_ms_p95": 137.15763449990843,
-    "throughput_samples_per_sec": 11.28,
+    "latency_ms_mean": 90.1361755801554,
+    "latency_ms_std": 53.23499979447596,
+    "latency_ms_p95": 132.25438710051094,
+    "throughput_samples_per_sec": 11.09,
     "size_mb": 0.4617
   },
   "standalone_cnn_ton-iot_binary": {
-    "latency_ms_mean": 84.84538089999548,
-    "latency_ms_std": 20.20684581273698,
-    "latency_ms_p95": 134.60220259988773,
-    "throughput_samples_per_sec": 11.79,
+    "latency_ms_mean": 93.67242451000493,
+    "latency_ms_std": 22.958219979123196,
+    "latency_ms_p95": 144.0228140492763,
+    "throughput_samples_per_sec": 10.68,
     "size_mb": 0.4617
   },
   "standalone_cnn_iot-23_binary": {
-    "latency_ms_mean": 82.33573723999598,
-    "latency_ms_std": 20.33217395149935,
-    "latency_ms_p95": 135.67935764980348,
-    "throughput_samples_per_sec": 12.15,
+    "latency_ms_mean": 90.15650068999093,
+    "latency_ms_std": 20.43476208880346,
+    "latency_ms_p95": 142.42954259880207,
+    "throughput_samples_per_sec": 11.09,
     "size_mb": 0.4617
   },
   "standalone_lstm_nsl-kdd_binary": {
