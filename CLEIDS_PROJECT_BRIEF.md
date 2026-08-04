@@ -677,5 +677,9 @@ confirmed complete and their outputs shared back:
   (revised from INT8 dynamic-range, §3e) holds up across all 10 checkpoints. Magnitude pruning is real
   and mostly reliable, but genuinely unreliable for TON_IoT/IoT-23 multiclass — see §3f, reported
   honestly rather than hidden. Complete and pushed (2026-07-28).
-- [ ] Notebook 06 — CPU-only latency/throughput benchmark complete
+- [x] Notebook 06 — CPU-only latency/throughput benchmark complete. All 55 entries (CLEIDS-Edge
+  original + quantized x 5 datasets x 2 tasks, 5 keras baselines x 5 datasets, RF+SVM retrained fresh
+  x 5 datasets) real, verified clean (no NaNs, no missing fields). Peak memory dropped as a metric —
+  genuinely infeasible in the Colab sandbox, see §3h; model size used as the proxy instead. Complete
+  and pushed (2026-08-04).
 - [ ] Notebook 07 — `all_paper_numbers.json` printed, all figures exported to `figures/`
