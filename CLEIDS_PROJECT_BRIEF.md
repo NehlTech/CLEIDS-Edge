@@ -731,3 +731,97 @@ confirmed complete and their outputs shared back:
   `figures/`. Built and fully validated locally against the real, complete results (not a subset) —
   see §3i for the real legend-placement bug caught by visual inspection. Complete and pushed
   (2026-08-04).
+
+## 9. Architecture, pipeline & algorithm reference (for thesis Chapter 3 methodology writing)
+
+Added 2026-08-04, after all 8 notebooks were complete, specifically for the methodology chapter —
+none of this changes any result, it documents the real system that was already built.
+
+**Figures** (both in `figures/`, generated directly from real artifacts, not hand-drawn/invented):
+- `cleids_edge_architecture.png` — the CNN-LSTM layer stack with real shapes and parameter counts,
+  read directly from the actual trained `models/cleids_edge_nsl-kdd_binary.keras` checkpoint via
+  `model.summary()`/`layer.count_params()`, not typed from memory. Total model parameters: 123,857
+  (matches `trainable_params + non_trainable_params` from the real checkpoint; excludes the
+  246,948 Adam optimizer state parameters, which are training-time-only and not part of the
+  deployed model).
+- `cleids_edge_pipeline.png` — the real 8-stage pipeline, one stage per notebook actually built
+  (Notebook 00 → 07), not a generic textbook diagram.
+
+**Algorithm 1 — CLEIDS-Edge training & evaluation protocol** (Notebook 03, applied identically to
+every baseline in Notebook 04):
+```
+Input: dataset D (train/val/test splits, pre-SMOTE-balanced on train only), task ∈ {binary, multiclass}
+Output: trained model M, default-threshold metrics, tuned-threshold metrics
+
+1. Build model M (CLEIDS-Edge hybrid CNN-LSTM, or baseline architecture)
+2. Fit M on D.train, validating on D.val, with:
+     - EarlyStopping(monitor=val_loss, patience=5, restore_best_weights=True)
+     - ReduceLROnPlateau(monitor=val_loss, factor=0.5, patience=3)
+     - ModelCheckpoint(save_best_only=True)
+3. val_prob  ← M.predict(D.val.X)
+   test_prob ← M.predict(D.test.X)
+4. default_metrics ← compute_metrics(D.test.y, test_prob, threshold=0.5)
+5. IF default_metrics.FPR > 0.20 THEN                       # auto-retry rule, applied programmatically
+     refit M with patience=10 (repeat steps 2-4)
+6. best_t ← YoudensJThresholdTuning(D.val.y, val_prob)       # Algorithm 2
+7. tuned_metrics ← compute_metrics(D.test.y, test_prob, threshold=best_t)
+8. RETURN M, default_metrics, tuned_metrics
+```
+
+**Algorithm 2 — Youden's J threshold selection** (`tune_threshold_and_reevaluate`, Notebooks 03/04;
+replaced an earlier max-F1 criterion after it was found to distort under class imbalance, §2d):
+```
+Input: validation labels y_val, validation probabilities val_prob
+Output: best_t (decision threshold maximizing TPR - FPR on the VALIDATION set only)
+
+1. best_t ← 0.5,  best_j ← -2.0
+2. FOR t IN linspace(0.01, 0.99, 99):
+3.     pred ← (val_prob ≥ t)
+4.     tpr ← recall(y_val, pred)
+5.     fpr ← FalsePositiveRate(y_val, pred)
+6.     j ← tpr - fpr
+7.     IF j > best_j THEN best_j ← j,  best_t ← t
+8. RETURN best_t
+```
+
+**Algorithm 3 — 16x8 post-training quantization** (`quantize_to_tflite`, Notebook 05; the real,
+verified fix after pure INT8 dynamic-range and full-INT8 quantization both failed on this
+architecture's unrolled LSTM, §3e):
+```
+Input: trained model M, validation set X_val (calibration data only, never test), batch_size
+Output: TFLite model with INT16 activations / INT8 weights
+
+1. M_export ← rebuild M with a FIXED batch_shape Input() and LSTM(unroll=True)   # required for
+                                                                                    TFLite conversion
+2. M_export.set_weights(M.get_weights())                      # identical weights, different graph shape
+3. calib ← first 1024-2048 real rows of X_val, padded to a multiple of batch_size
+4. converter ← TFLiteConverter.from_keras_model(M_export)
+5. converter.optimizations ← [DEFAULT]
+6. converter.representative_dataset ← generator yielding calib in batch_size chunks
+7. converter.target_spec.supported_ops ← [ACTIVATIONS_INT16_WEIGHTS_INT8]
+8. converter.inference_input_type ← float32;  converter.inference_output_type ← float32
+9. tflite_model ← converter.convert()
+10. RETURN tflite_model
+```
+
+**Algorithm 4 — One-shot magnitude pruning** (`prune_model_weights`, Notebook 05; genuinely
+post-training, zero fine-tuning, matching the project's stated "Edge adaptation" scope):
+```
+Input: trained model M, sparsity fraction s ∈ (0, 1)
+Output: pruned model M' (same architecture, same weight shapes, smallest-magnitude weights zeroed)
+
+1. M' ← clone M, copy weights
+2. FOR EACH layer L IN M':
+3.     IF L is Dense or Conv1D:
+4.         kernel ← L.weights[0]
+5.         threshold ← percentile(|kernel|, s × 100)
+6.         L.weights[0] ← kernel × (|kernel| ≥ threshold)      # element-wise zeroing
+7.     ELSE IF L is LSTM:
+8.         FOR EACH of L's kernel and recurrent_kernel:
+9.             threshold ← percentile(|weight|, s × 100)
+10.            weight ← weight × (|weight| ≥ threshold)
+11. RETURN M'
+```
+Real, verified caveat for the write-up (§3f): this works reliably for Dense/Conv1D-dominated models
+and for most dataset/task combinations, but was found to genuinely destabilize the LSTM's recurrent
+dynamics on TON_IoT and IoT-23 multiclass specifically — report this as a finding, not omit it.
