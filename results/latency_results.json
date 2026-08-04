@@ -371,17 +371,17 @@
     "size_mb": 0.0035
   },
   "random_forest_iot-23_binary": {
-    "latency_ms_mean": 14.151912799970887,
-    "latency_ms_std": 1.988224679216484,
-    "latency_ms_p95": 17.141105999689895,
-    "throughput_samples_per_sec": 70.66,
+    "latency_ms_mean": 13.878960514975915,
+    "latency_ms_std": 1.9783607852856864,
+    "latency_ms_p95": 16.5598426507131,
+    "throughput_samples_per_sec": 72.05,
     "size_mb": 217.5476
   },
   "svm_iot-23_binary": {
-    "latency_ms_mean": 2.7659743900130707,
-    "latency_ms_std": 0.6954692312562673,
-    "latency_ms_p95": 3.926844800389517,
-    "throughput_samples_per_sec": 361.54,
+    "latency_ms_mean": 2.431878860006691,
+    "latency_ms_std": 0.4573308118865231,
+    "latency_ms_p95": 3.051832051096426,
+    "throughput_samples_per_sec": 411.2,
     "size_mb": 0.0035
   }
 }
