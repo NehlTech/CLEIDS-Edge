@@ -1,30 +1,30 @@
 {
   "cleids_edge_nsl-kdd_binary__original": {
-    "latency_ms_mean": 80.08840379499361,
-    "latency_ms_std": 21.21650249592051,
-    "latency_ms_p95": 132.00097774994785,
-    "throughput_samples_per_sec": 12.49,
+    "latency_ms_mean": 103.31616578007015,
+    "latency_ms_std": 26.67400943063644,
+    "latency_ms_p95": 157.00126025167262,
+    "throughput_samples_per_sec": 9.68,
     "size_mb": 1.5477
   },
   "cleids_edge_nsl-kdd_binary__quantized": {
-    "latency_ms_mean": 3.1785739699955684,
-    "latency_ms_std": 0.28589524303113784,
-    "latency_ms_p95": 3.5987396999757926,
-    "throughput_samples_per_sec": 314.61,
+    "latency_ms_mean": 4.804659285018715,
+    "latency_ms_std": 0.3480417865339324,
+    "latency_ms_p95": 5.533411002761566,
+    "throughput_samples_per_sec": 208.13,
     "size_mb": 0.2729
   },
   "cleids_edge_nsl-kdd_multiclass__original": {
-    "latency_ms_mean": 79.2509733599968,
-    "latency_ms_std": 19.872726670814554,
-    "latency_ms_p95": 130.5457725999929,
-    "throughput_samples_per_sec": 12.62,
+    "latency_ms_mean": 87.24953616499988,
+    "latency_ms_std": 21.38792698964773,
+    "latency_ms_p95": 133.8372928503304,
+    "throughput_samples_per_sec": 11.46,
     "size_mb": 1.5782
   },
   "cleids_edge_nsl-kdd_multiclass__quantized": {
-    "latency_ms_mean": 2.948563025001363,
-    "latency_ms_std": 0.3238168906638815,
-    "latency_ms_p95": 3.580473549959603,
-    "throughput_samples_per_sec": 339.15,
+    "latency_ms_mean": 4.7459252099906735,
+    "latency_ms_std": 0.6346031578398064,
+    "latency_ms_p95": 6.417346050329797,
+    "throughput_samples_per_sec": 210.71,
     "size_mb": 0.277
   },
   "cleids_edge_cicids2017_binary__original": {
