@@ -343,17 +343,17 @@
     "size_mb": 0.0035
   },
   "random_forest_unsw-nb15_binary": {
-    "latency_ms_mean": 22.069860495066678,
-    "latency_ms_std": 2.840221524077974,
-    "latency_ms_p95": 26.78469099964786,
-    "throughput_samples_per_sec": 45.31,
+    "latency_ms_mean": 21.905270849674707,
+    "latency_ms_std": 3.1724247623662656,
+    "latency_ms_p95": 27.20906250069674,
+    "throughput_samples_per_sec": 45.65,
     "size_mb": 287.6102
   },
   "svm_unsw-nb15_binary": {
-    "latency_ms_mean": 2.4652187800438696,
-    "latency_ms_std": 0.569688001112983,
-    "latency_ms_p95": 3.2700173001103385,
-    "throughput_samples_per_sec": 405.64,
+    "latency_ms_mean": 2.708583044968691,
+    "latency_ms_std": 0.36277609338258926,
+    "latency_ms_p95": 3.069678102292528,
+    "throughput_samples_per_sec": 369.2,
     "size_mb": 0.0063
   },
   "random_forest_ton-iot_binary": {
