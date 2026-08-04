@@ -825,3 +825,45 @@ Output: pruned model M' (same architecture, same weight shapes, smallest-magnitu
 Real, verified caveat for the write-up (§3f): this works reliably for Dense/Conv1D-dominated models
 and for most dataset/task combinations, but was found to genuinely destabilize the LSTM's recurrent
 dynamics on TON_IoT and IoT-23 multiclass specifically — report this as a finding, not omit it.
+
+## 10. Figure usage guide (which of the 62 files in `figures/` actually belong in the thesis)
+
+`figures/` contains 62 PNGs total — far too many to place in the main body one by one. Use this
+split; don't ask the user which figures to use, this section already answers it.
+
+**Main body, once each (7 figures) — these are the whole results narrative, no repeats:**
+
+| File | Chapter |
+|---|---|
+| `cleids_edge_architecture.png` | 3 (Methodology — model architecture) |
+| `cleids_edge_pipeline.png` | 3 (Methodology — end-to-end pipeline) |
+| `cross_dataset_summary.png` | 4 (overview of CLEIDS-Edge's own results, all 5 datasets) |
+| `baseline_comparison_f1.png` | 4 (main comparison vs. all 7 baselines) |
+| `cross_model_f1_heatmap.png` | 4 (compact all-models × all-datasets view) |
+| `compression_tradeoff.png` | 4 (accuracy/size/latency, original vs. 16x8 quantized) |
+| `efficiency_frontier.png` | 4 or 5 (headline accuracy-vs-latency trade-off — the core evidence for Contribution 1) |
+
+**Two representative datasets as worked examples in the main body** — NSL-KDD (the best-known
+benchmark, use as the "typical case") and IoT-23 (ties directly to the real, documented AUC ceiling
+finding in §2c, use as the "hard case" — its ROC/PR curve supports an actual argument, not just
+decoration):
+
+| File pattern | Use |
+|---|---|
+| `confusion_matrix_nsl-kdd_binary.png`, `confusion_matrix_nsl-kdd_multiclass.png` | Ch 4 |
+| `roc_curve_nsl-kdd_binary.png`, `pr_curve_nsl-kdd_binary.png` | Ch 4 |
+| `confusion_matrix_iot-23_binary.png` | Ch 4, alongside the §2c ceiling discussion |
+| `roc_curve_iot-23_binary.png`, `pr_curve_iot-23_binary.png` | Ch 4, alongside the §2c ceiling discussion |
+| `training_curve_nsl-kdd_binary.png` | Ch 3 or 4 (one example is enough to illustrate convergence) |
+| `embeddings_nsl-kdd_binary.png` | Ch 4 (one example is enough to illustrate the concept) |
+| `per_class_metrics_iot-23_multiclass.png` | Ch 4, ties to class-imbalance discussion |
+
+That's ~18-19 figures total in the main body — a normal amount for a results-heavy MPhil chapter.
+
+**Everything else goes in an Appendix**, not the main body: the full confusion-matrix/ROC/PR/
+training-curve/embeddings/per-class-metrics sets for CICIDS2017, UNSW-NB15, and TON_IoT (and any
+NSL-KDD/IoT-23 variants not already used above, e.g. multiclass ROC/PR curves). Reference it in
+Chapter 4 with a line such as "Full diagnostic figures for all five datasets are provided in
+Appendix B; NSL-KDD and IoT-23 are discussed here as representative examples." This is standard
+practice, not a shortcut — it demonstrates the full evidence exists without forcing the reader
+through all of it.
