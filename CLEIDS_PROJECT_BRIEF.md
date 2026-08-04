@@ -498,12 +498,14 @@ component on TON_IoT- and IoT-23-like data, while 16x8 quantization remains reli
 
 ## 3g. Notebook 06 — CPU-only latency/throughput benchmark (built 2026-07-28)
 
-Measures per-sample inference latency, throughput, real model size, and peak memory for CLEIDS-Edge
-(original checkpoints and the 16x8-quantized TFLite artifacts, §3e) and all 7 baselines from §3, all
-CPU-only with threading forced to 1 (`tf.config.set_visible_devices([], "GPU")`, both TF thread-pool
-sizes set to 1, and `OMP_NUM_THREADS`/`MKL_NUM_THREADS`/`OPENBLAS_NUM_THREADS` set to `"1"` before
-NumPy/scikit-learn are imported). This is the number set behind Contribution 1's edge-deployability
-claim, so single-thread CPU fidelity matters more here than anywhere else in the project.
+Measures per-sample inference latency, throughput, and real model size for CLEIDS-Edge (original
+checkpoints and the 16x8-quantized TFLite artifacts, §3e) and all 7 baselines from §3, all CPU-only
+with threading forced to 1 (`tf.config.set_visible_devices([], "GPU")`, both TF thread-pool sizes set
+to 1, and `OMP_NUM_THREADS`/`MKL_NUM_THREADS`/`OPENBLAS_NUM_THREADS` set to `"1"` before NumPy/
+scikit-learn are imported). This is the number set behind Contribution 1's edge-deployability claim,
+so single-thread CPU fidelity matters more here than anywhere else in the project. Peak memory was
+also attempted but proved genuinely infeasible in this environment — see §3h for the full record;
+model size is used as the memory-footprint proxy instead.
 
 **A real problem found while planning this notebook**: Random Forest and SVM were never saved as
 model artifacts in Notebook 04 — `train_and_evaluate_baseline()` fits and evaluates them in-session and
@@ -524,11 +526,6 @@ separate large-batch run, keeping the methodology identical and directly compara
 TFLite, and scikit-learn runtimes. Each measurement discards the first 20 calls as warmup before timing
 200 real calls, recording mean, std, and p95 (ms), not just the mean.
 
-**Peak memory** uses `resource.getrusage().ru_maxrss` delta before/after a short inference run — a real
-measurement with a disclosed limitation: whole-process peak RSS, not perfectly isolated to one model in
-a shared Python/TensorFlow process. Directionally meaningful within this benchmark run, not a
-laboratory-grade isolated measurement.
-
 **Pruning is deliberately not latency-benchmarked.** §3f already established that one-shot magnitude
 pruning zeroes weights but stores them densely — without a sparse-aware runtime (which TFLite's
 standard interpreter does not provide), a pruned model runs at the *same* latency as the unpruned one;
@@ -542,8 +539,8 @@ end to end with no crashes or NaNs and directionally sane numbers — e.g. the 1
 artifact ran ~5x faster than the original `.keras` checkpoint (14.6ms vs. 71.2ms on the binary task),
 consistent with quantization's expected benefit.
 
-## 3h. Notebook 06 — real peak-memory bug found in the actual Colab results, fixed via subprocess
-isolation (2026-07-28)
+## 3h. Notebook 06 — peak memory: two real bugs found, second one genuinely unfixable, dropped as a
+metric (2026-07-28 through 2026-08-04)
 
 All 55 entries ran for real on Colab (CLEIDS-Edge original + quantized x 5 datasets x 2 tasks = 20,
 5 keras baselines x 5 datasets = 25, RF+SVM x 5 datasets = 10). Latency and throughput are real and
@@ -551,37 +548,56 @@ sane — quantized latency scales with each dataset's real feature count (UNSW-N
 the slowest quantized latency at 3.65-3.68ms; CICIDS2017/TON_IoT/IoT-23's 76-78 features give the
 fastest at ~1.4-1.5ms; NSL-KDD's 122 sits in between at 2.29ms) — a physically sensible relationship,
 not noise. Model sizes are real (Random Forest 150-287MB serialized, matching 200-tree ensembles;
-linear-SVM 3.5-6.3KB).
+linear-SVM 3.5-6.3KB). These numbers are the final, trustworthy results for Notebook 06.
 
-**Peak memory was broken**, caught by reviewing the actual numbers rather than trusting them: only 3 of
+**First peak-memory bug**, caught by reviewing the actual numbers rather than trusting them: only 3 of
 55 entries had a nonzero `peak_memory_mb` (all three belonging to `cleids_edge_nsl-kdd_binary`/
 `multiclass`, the very first model processed) — every other entry, including Random Forest checkpoints
 150-287MB in size, read exactly `0.00MB`. Root cause: `resource.getrusage().ru_maxrss` is a cumulative,
 process-wide high-water mark that never resets for the life of the Python process; across 55 sequential
 benchmarks sharing one long-running Colab process, only the very first model measured can ever set a
-new "peak," regardless of how much memory later, genuinely different models use. A `0.00MB` reading did
-not mean "this model uses no memory" — it meant "this particular call didn't happen to be the process's
-all-time high," which almost none of them, after the first, ever would be.
+new "peak," regardless of how much memory later, genuinely different models use.
 
-**Real fix**: `scripts/measure_peak_memory_worker.py`, a standalone script that loads/runs exactly one
-model in its own fresh, isolated Python subprocess, so `ru_maxrss` at the end genuinely is that model's
-own real peak — the standard, correct way to do per-model memory profiling. Notebook 06's new §9 calls
-this worker once per entry (55 total) via `subprocess.run`, overwriting only the `peak_memory_mb` field
-of each existing `results/latency_results.json` entry — latency/throughput/size from the original run
-are untouched and were already correct. Verified locally before running on Colab: four representative
-spec kinds (CLEIDS-Edge original, CLEIDS-Edge quantized, a Keras baseline, and SVM) each produced real,
-distinct nonzero peak-memory values (422.8MB, 492.4MB, 172.3MB, 101.4MB respectively) — a stark, working
-contrast to the broken in-process `0.00MB` readings.
+**Attempted fix**: `scripts/measure_peak_memory_worker.py`, a standalone script that loaded/ran exactly
+one model in its own fresh, isolated Python subprocess, so `ru_maxrss` at the end should genuinely be
+that model's own real peak — the standard, correct way to do per-model memory profiling. Verified
+working locally before running on Colab: four representative spec kinds (CLEIDS-Edge original,
+CLEIDS-Edge quantized, a Keras baseline, and SVM) each produced real, distinct nonzero peak-memory
+values (422.8MB, 492.4MB, 172.3MB, 101.4MB) — a stark, working contrast to the broken in-process
+`0.00MB` readings.
+
+**Second peak-memory bug, on Colab specifically**: running the isolated-subprocess fix for real, all 55
+entries came back with the *exact same* value, ~5.36GB (5359.473MB), regardless of model type — a
+linear SVM and a 150MB+ Random Forest reporting identical memory use is not plausible. Diagnosed with
+two independent checks rather than assumed: (1) a bare `python3 -c "import resource; print(...)"` with
+nothing else loaded showed the identical figure (`ru_maxrss=5488100` KB), and (2) reading
+`/proc/self/status` directly — a completely different OS-level mechanism, not going through the
+`getrusage()` syscall at all — from the Colab kernel's own process showed the same `VmHWM=5488100 kB`
+again. Two independent measurement techniques, both reporting an identical constant regardless of what
+is actually running: conclusive evidence this specific Colab sandbox does not expose real per-process
+memory accounting (likely a container/syscall-emulation artifact), not a bug in this project's worker
+script — which was independently verified correct on a normal (non-sandboxed) machine.
+
+**Decision**: peak memory is dropped as a directly-measured metric for Notebook 06. `scripts/
+measure_peak_memory_worker.py` was removed (a verified-correct approach for a normal environment, but a
+dead end for this one). Notebook 06's §9 now just strips any stray `peak_memory_mb` field left over
+from the two abandoned attempts. **Model size** (real, correct, measured for all 55 entries) is used as
+the practical memory-footprint proxy in the thesis instead — for these architectures, on-device memory
+scales closely with parameter/weight storage size, a defensible substitute given genuine RSS profiling
+is unavailable in this environment.
 
 Consistent with the project's standing practice of catching a measurement methodology's own flaws by
-checking whether the real numbers make sense, rather than accepting a clean-looking table at face value
-(same discipline as the Notebook 04 default-vs-tuned-threshold bug, §3c).
+checking whether the real numbers make sense (same discipline as the Notebook 04 default-vs-tuned-
+threshold bug, §3c) — and, when a real fix turns out not to work either, reporting that honestly and
+substituting a real, defensible alternative rather than forcing a broken number into the results
+(same discipline as the SVM linear-fallback and Misrak & Melaku exclusions, §3).
 
 ## 4. Evaluation metrics
 
 - Detection: Accuracy, Precision, Recall, F1-score, False Positive Rate (FPR), AUC-ROC
-- Efficiency: Inference latency (ms/sample, CPU-only), throughput (samples/sec), model size (MB),
-  peak memory footprint
+- Efficiency: Inference latency (ms/sample, CPU-only), throughput (samples/sec), model size (MB). Peak
+  memory footprint was attempted but found genuinely infeasible to measure in the Colab environment
+  (§3h) — model size is used as the memory-footprint proxy instead.
 - Robustness: performance drop after quantization/pruning (accuracy delta vs compression ratio)
 
 **Figures (Notebook 03, per training run — dataset x binary/multiclass), all 300 DPI:**
