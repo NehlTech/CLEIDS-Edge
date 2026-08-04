@@ -210,38 +210,38 @@
     "size_mb": 0.6025
   },
   "nazir2024_nsl-kdd_binary": {
-    "latency_ms_mean": 93.41820494999978,
-    "latency_ms_std": 19.11039280832162,
-    "latency_ms_p95": 137.142047600139,
-    "throughput_samples_per_sec": 10.7,
+    "latency_ms_mean": 111.48472308010241,
+    "latency_ms_std": 20.67019854883772,
+    "latency_ms_p95": 151.11645644974485,
+    "throughput_samples_per_sec": 8.97,
     "size_mb": 2.3503
   },
   "nazir2024_cicids2017_binary": {
-    "latency_ms_mean": 94.59492038500457,
-    "latency_ms_std": 21.16887855785677,
-    "latency_ms_p95": 141.7939075501181,
-    "throughput_samples_per_sec": 10.57,
+    "latency_ms_mean": 98.66656920503374,
+    "latency_ms_std": 21.240180828817536,
+    "latency_ms_p95": 142.33739914852777,
+    "throughput_samples_per_sec": 10.14,
     "size_mb": 2.3503
   },
   "nazir2024_unsw-nb15_binary": {
-    "latency_ms_mean": 106.75113896999392,
-    "latency_ms_std": 24.53285480611605,
-    "latency_ms_p95": 150.4359426001656,
-    "throughput_samples_per_sec": 9.37,
+    "latency_ms_mean": 110.79768956502448,
+    "latency_ms_std": 23.97308337779927,
+    "latency_ms_p95": 149.78282575029877,
+    "throughput_samples_per_sec": 9.03,
     "size_mb": 2.3503
   },
   "nazir2024_ton-iot_binary": {
-    "latency_ms_mean": 99.49948822997612,
-    "latency_ms_std": 35.12608416406813,
-    "latency_ms_p95": 144.60743925001225,
-    "throughput_samples_per_sec": 10.05,
+    "latency_ms_mean": 93.52509278014622,
+    "latency_ms_std": 19.48232490147614,
+    "latency_ms_p95": 138.80247145207244,
+    "throughput_samples_per_sec": 10.69,
     "size_mb": 2.3503
   },
   "nazir2024_iot-23_binary": {
-    "latency_ms_mean": 97.98861109998597,
-    "latency_ms_std": 21.771541908537348,
-    "latency_ms_p95": 148.44513645016374,
-    "throughput_samples_per_sec": 10.21,
+    "latency_ms_mean": 98.06787140008964,
+    "latency_ms_std": 23.470613916214578,
+    "latency_ms_p95": 144.44036125023558,
+    "throughput_samples_per_sec": 10.2,
     "size_mb": 2.3503
   },
   "altaie_hoomod2024_nsl-kdd_binary": {
