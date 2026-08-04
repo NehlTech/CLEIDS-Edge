@@ -280,38 +280,38 @@
     "size_mb": 10.7349
   },
   "wang2023_dlbilstm_nsl-kdd_binary": {
-    "latency_ms_mean": 113.11530768000694,
-    "latency_ms_std": 27.750368675762587,
-    "latency_ms_p95": 171.21532534981688,
-    "throughput_samples_per_sec": 8.84,
+    "latency_ms_mean": 115.91579207997711,
+    "latency_ms_std": 38.371209112949465,
+    "latency_ms_p95": 219.74333634989304,
+    "throughput_samples_per_sec": 8.63,
     "size_mb": 1.2375
   },
   "wang2023_dlbilstm_cicids2017_binary": {
-    "latency_ms_mean": 100.9660095850154,
-    "latency_ms_std": 20.85157691791748,
-    "latency_ms_p95": 142.05601959995414,
-    "throughput_samples_per_sec": 9.9,
+    "latency_ms_mean": 95.30715706012415,
+    "latency_ms_std": 18.885528627791714,
+    "latency_ms_p95": 137.16365379932535,
+    "throughput_samples_per_sec": 10.49,
     "size_mb": 1.2375
   },
   "wang2023_dlbilstm_unsw-nb15_binary": {
-    "latency_ms_mean": 128.43982347499605,
-    "latency_ms_std": 32.41740658800522,
-    "latency_ms_p95": 216.24272115006988,
-    "throughput_samples_per_sec": 7.79,
+    "latency_ms_mean": 119.29245301000265,
+    "latency_ms_std": 31.12772315846688,
+    "latency_ms_p95": 211.16287190197906,
+    "throughput_samples_per_sec": 8.38,
     "size_mb": 1.2375
   },
   "wang2023_dlbilstm_ton-iot_binary": {
-    "latency_ms_mean": 101.83034583000335,
-    "latency_ms_std": 22.948677153734437,
-    "latency_ms_p95": 149.4526905998555,
-    "throughput_samples_per_sec": 9.82,
+    "latency_ms_mean": 113.14230634516207,
+    "latency_ms_std": 27.984918305781594,
+    "latency_ms_p95": 158.5871355022391,
+    "throughput_samples_per_sec": 8.84,
     "size_mb": 1.2375
   },
   "wang2023_dlbilstm_iot-23_binary": {
-    "latency_ms_mean": 103.80499219499825,
-    "latency_ms_std": 22.089196677909854,
-    "latency_ms_p95": 146.13943774972995,
-    "throughput_samples_per_sec": 9.63,
+    "latency_ms_mean": 111.29557221998766,
+    "latency_ms_std": 28.621439134158148,
+    "latency_ms_p95": 155.81724504827432,
+    "throughput_samples_per_sec": 8.99,
     "size_mb": 1.2375
   },
   "random_forest_nsl-kdd_binary": {
